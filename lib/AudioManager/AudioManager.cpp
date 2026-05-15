@@ -2,7 +2,6 @@
 #include "HardwareDriver.h"
 #include <math.h>
 #include "sounds/bop_sound.h"
-#include "sounds/funny_alarm.h"
 
 #define SAMPLE_RATE 16000
 

@@ -42,6 +42,7 @@ public:
     int getPosition() const { return position; }
     ScreenType getType() const { return type; }
     void resetLastFetchTime() {lastFetchTime = millis()+10000000;} // it will overflow in the needs update check
+    void postponeUpdate() { lastFetchTime = millis(); } // Prevent instant refetch
 };
 
 BaseScreen* createScreenFromType(const String& type, JsonObject& data);

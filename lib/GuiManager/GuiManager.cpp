@@ -210,6 +210,13 @@ void load_screen_by_index(int index, bool goingFromSettings) {
         default: return;
     }
 
+    //dont update the screen automatically on scrolling through screens
+    if (!goingFromSettings) {
+        if (screenObj->getType() == ScreenType::STOCK || screenObj->getType() == ScreenType::CRYPTO) {
+            screenObj->postponeUpdate();
+        }
+    }
+
     //render the correct data on screen
     screenObj->render();
 
