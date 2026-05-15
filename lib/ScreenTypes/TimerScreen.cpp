@@ -78,6 +78,7 @@ void TimerScreen::startTimerUIUpdate() {
 void TimerScreen::resetRunningTimer() {
     isRunning = false;
     isPaused = false;
+    stop_timer_alarm();
     resetTimerUIUpdate();
 }
 
@@ -143,7 +144,8 @@ bool TimerScreen::updateTimer(bool updateUI) {
             if (updateUI) updateTimerUI();
             
             timerEndUIUpdate();
-            play_beep(1500, 400);
+
+            start_timer_alarm();
             isPaused = true;
             return true;
         } else {
