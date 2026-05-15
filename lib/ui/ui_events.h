@@ -14,6 +14,7 @@ void setButtonsStatusHomeScreen(lv_event_t * e);
 void swipeNextScreen(lv_event_t * e);
 void toggleTurnOff(lv_event_t * e);
 void restartDevice(lv_event_t * e);
+void turnOffBacklight(lv_event_t * e);
 void toggleRotationSettings(lv_event_t * e);
 void saveBrightness(lv_event_t * e);
 void setBrightnessFromArc(lv_event_t * e);

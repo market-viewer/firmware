@@ -18,9 +18,9 @@ SET(SOURCES ui_homeScreen.c
     ui_img_650757212.c
     ui_img_1826884842.c
     ui_img_367695115.c
-    ui_img_871200326.c
+    ui_img_2022622889.c
     ui_img_555948897.c
-    ui_img_301975032.c
+    ui_img_871200326.c
     ui_img_1272477160.c
     ui_img_1702299517.c
     ui_img_536642073.c

@@ -53,9 +53,9 @@ LV_IMG_DECLARE(ui_img_1314322640);    // assets/power-icon.png
 LV_IMG_DECLARE(ui_img_650757212);    // assets/reboot-icon.png
 LV_IMG_DECLARE(ui_img_1826884842);    // assets/brightness-icon.png
 LV_IMG_DECLARE(ui_img_367695115);    // assets/volume-icon.png
-LV_IMG_DECLARE(ui_img_871200326);    // assets/rotate-icon.png
+LV_IMG_DECLARE(ui_img_2022622889);    // assets/no-back-light-icon.png
 LV_IMG_DECLARE(ui_img_555948897);    // assets/monitor-icon.png
-LV_IMG_DECLARE(ui_img_301975032);    // assets/battery-empty-icon.png
+LV_IMG_DECLARE(ui_img_871200326);    // assets/rotate-icon.png
 LV_IMG_DECLARE(ui_img_1272477160);    // assets/wifi-icon.png
 LV_IMG_DECLARE(ui_img_1702299517);    // assets/return-icon.png
 LV_IMG_DECLARE(ui_img_536642073);    // assets/check-icon.png

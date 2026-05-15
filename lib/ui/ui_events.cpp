@@ -23,40 +23,6 @@
 //global shield to not control screen when it is off
 lv_obj_t * blackout_shield = NULL;
 
-// void toggleTurnOff(lv_event_t * e)
-// {        
-       
-//     if (isScreenOff) {
-//         Serial.println("Screen waking up!");
-        
-//         setCpuFrequencyMhz(240); // drop speed when device is 'turned on'
-//         set_brightness_percentage(currentBrightness);
-//         isScreenOff = false;
-
-//         if (blackout_shield != NULL) {
-//             lv_obj_del(blackout_shield);
-//             blackout_shield = NULL; 
-//         }
-//     } else {
-//         Serial.println("Screen going to sleep");
-
-//         set_brightness(0);
-//         isScreenOff = true;
-
-//         //CREATE THE SHIELD
-//         blackout_shield = lv_obj_create(lv_layer_top());        
-//         lv_obj_set_size(blackout_shield, LV_PCT(100), LV_PCT(100));        
-//         lv_obj_set_style_bg_opa(blackout_shield, 0, 0);
-//         lv_obj_set_style_border_width(blackout_shield, 0, 0);        
-//         lv_obj_add_flag(blackout_shield, LV_OBJ_FLAG_CLICKABLE);
-//         lv_obj_clear_flag(blackout_shield, LV_OBJ_FLAG_SCROLLABLE);
-//         lv_obj_add_event_cb(blackout_shield, toggleTurnOff, LV_EVENT_CLICKED, NULL);
-
-//         setCpuFrequencyMhz(80); // drop speed when device is 'turned off'
-
-//     }    
-// }
-
 #define WAKE_BUTTON_PIN GPIO_NUM_0 
 void toggleTurnOff(lv_event_t * e)
 {        
@@ -263,4 +229,12 @@ void restartDevice(lv_event_t * e)
     show_info_message("Restarting device");
     delay(400);
 	ESP.restart();
+}
+
+void turnOffBacklight(lv_event_t * e)
+{
+    display_message("Click again to wake up.", MessageSeverity::INFO);
+    delay(500);
+    destroy_message();
+	toggleScreenOff(e);
 }

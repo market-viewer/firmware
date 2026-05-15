@@ -3,6 +3,8 @@
 
 #include <Arduino.h>
 #include "BaseScreen.h"
+#include "ui.h"
+
 
 //wifi screen
 void changeWifiScreenNotConnected();
@@ -11,6 +13,7 @@ void displayWifiConnectCredentials(bool shouldDisplay);
 
 // home screen
 void changeHomeScreenWifiIcon(bool isConnected);
+void toggleScreenOff(lv_event_t * e);
 
 //hardware screens
 void saveHardwaveNumberToPreferences(String name, int value);
