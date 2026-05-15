@@ -7,9 +7,15 @@
 #include "ScreensManager.h"
 #include "ui_events.h"
 
+#define WAKE_BUTTON_PIN 0
+bool lastWakeButtonState = HIGH;
+unsigned long lastWakeButtonTime = 0;
+
 void setup() {
   Serial.begin(115200);
   
+  pinMode(WAKE_BUTTON_PIN, INPUT_PULLUP);
+
   //initialize Hardware (Screen, Touch, I2C)
   init_hardware();
 
@@ -35,6 +41,16 @@ void loop() {
     update_gui();
   
     updateScreen();
+
+    // check the button to return to the home screen
+    bool currentButtonState = digitalRead(WAKE_BUTTON_PIN);
+    if (currentButtonState == LOW && lastWakeButtonState == HIGH) {
+        if (millis() - lastWakeButtonTime > 200) { // debounce
+            go_to_home_screen();
+            lastWakeButtonTime = millis();
+        }
+    }
+    lastWakeButtonState = currentButtonState;
 
     delay(5);
 }
