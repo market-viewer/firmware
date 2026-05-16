@@ -39,6 +39,7 @@ void ui_event_turnOffButton(lv_event_t * e)
 
     if(event_code == LV_EVENT_CLICKED) {
         toggleTurnOff(e);
+        playButtonClickedSound(e);
     }
 }
 
@@ -48,6 +49,7 @@ void ui_event_restartButton(lv_event_t * e)
 
     if(event_code == LV_EVENT_CLICKED) {
         restartDevice(e);
+        playButtonClickedSound(e);
     }
 }
 
@@ -57,6 +59,7 @@ void ui_event_brightnessButton(lv_event_t * e)
 
     if(event_code == LV_EVENT_CLICKED) {
         _ui_screen_change(&ui_brightnessScreen, LV_SCR_LOAD_ANIM_NONE, 0, 0, &ui_brightnessScreen_screen_init);
+        playButtonClickedSound(e);
     }
 }
 
@@ -66,6 +69,7 @@ void ui_event_volumeButton(lv_event_t * e)
 
     if(event_code == LV_EVENT_CLICKED) {
         _ui_screen_change(&ui_volumeScreen, LV_SCR_LOAD_ANIM_NONE, 0, 0, &ui_volumeScreen_screen_init);
+        playButtonClickedSound(e);
     }
 }
 
@@ -75,6 +79,7 @@ void ui_event_screensButton1(lv_event_t * e)
 
     if(event_code == LV_EVENT_CLICKED) {
         turnOffBacklight(e);
+        playButtonClickedSound(e);
     }
 }
 
@@ -84,6 +89,7 @@ void ui_event_screensButton(lv_event_t * e)
 
     if(event_code == LV_EVENT_CLICKED) {
         _ui_screen_change(&ui_screensScreen, LV_SCR_LOAD_ANIM_NONE, 0, 0, &ui_screensScreen_screen_init);
+        playButtonClickedSound(e);
     }
 }
 
@@ -93,6 +99,7 @@ void ui_event_rotateButton(lv_event_t * e)
 
     if(event_code == LV_EVENT_CLICKED) {
         toggleRotationSettings(e);
+        playButtonClickedSound(e);
     }
 }
 
@@ -102,6 +109,7 @@ void ui_event_wifiButton(lv_event_t * e)
 
     if(event_code == LV_EVENT_CLICKED) {
         _ui_screen_change(&ui_wifiScreen, LV_SCR_LOAD_ANIM_NONE, 0, 0, &ui_wifiScreen_screen_init);
+        playButtonClickedSound(e);
     }
 }
 

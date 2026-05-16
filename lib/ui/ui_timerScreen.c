@@ -43,6 +43,7 @@ void ui_event_timerResetButton(lv_event_t * e)
 
     if(event_code == LV_EVENT_CLICKED) {
         timerResetPressed(e);
+        playButtonClickedSound(e);
     }
 }
 
@@ -52,6 +53,7 @@ void ui_event_timerPlayPauseButton(lv_event_t * e)
 
     if(event_code == LV_EVENT_CLICKED) {
         timerStartPressed(e);
+        playButtonClickedSound(e);
     }
 }
 

@@ -13,6 +13,7 @@ extern "C" {
 void setButtonsStatusHomeScreen(lv_event_t * e);
 void swipeNextScreen(lv_event_t * e);
 void toggleTurnOff(lv_event_t * e);
+void playButtonClickedSound(lv_event_t * e);
 void restartDevice(lv_event_t * e);
 void turnOffBacklight(lv_event_t * e);
 void toggleRotationSettings(lv_event_t * e);

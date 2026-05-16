@@ -1,7 +1,8 @@
 #include "AudioManager.h"
 #include "HardwareDriver.h"
 #include <math.h>
-#include "sounds/bop_sound.h"
+#include "sounds/good_boy_sound.h"
+#include "sounds/button_click_sound.h"
 
 #define SAMPLE_RATE 16000
 
@@ -11,26 +12,46 @@ static volatile bool is_alarm_ringing = false;
 static TaskHandle_t alarm_task_handle = NULL;
 static SemaphoreHandle_t i2s_mutex = NULL;
 
+void alarm_sound_one() {
+    play_beep(523, 100); // C5
+    vTaskDelay(pdMS_TO_TICKS(100));
+    if (!is_alarm_ringing) return;
+    
+    play_beep(659, 100); // E5
+    vTaskDelay(pdMS_TO_TICKS(100));
+    if (!is_alarm_ringing) return;
+    
+    play_beep(784, 100); // G5
+    vTaskDelay(pdMS_TO_TICKS(100));
+    if (!is_alarm_ringing) return;
+    
+    play_beep(1046, 200); // C6 (High, held longer)
+    
+    // Wait 1 second before playing the sequence again
+    vTaskDelay(pdMS_TO_TICKS(700));
+}
+
+void alarm_sound_two() {
+    play_beep(659, 200); // E5 (Medium length)
+    vTaskDelay(pdMS_TO_TICKS(200));
+    if (!is_alarm_ringing) return;
+            
+    play_beep(523, 400); // C5 (Lower tone, held long)
+            
+    vTaskDelay(pdMS_TO_TICKS(1000));
+}
+
+void alarm_sound_mp3() {
+    play_sound(good_boy_sound, good_boy_sound_len);
+    vTaskDelay(pdMS_TO_TICKS(500));
+}
+
 //background worker thread
 void alarm_background_task(void *pvParameters) {
     while (true) {
         if (is_alarm_ringing) {
-            play_beep(523, 100); // C5
-            vTaskDelay(pdMS_TO_TICKS(100));
-            if (!is_alarm_ringing) continue; // Early exit check
-            
-            play_beep(659, 100); // E5
-            vTaskDelay(pdMS_TO_TICKS(100));
-            if (!is_alarm_ringing) continue;
-            
-            play_beep(784, 100); // G5
-            vTaskDelay(pdMS_TO_TICKS(100));
-            if (!is_alarm_ringing) continue;
-            
-            play_beep(1046, 200); // C6 (High, held longer)
-            
-            // Wait 1 second before playing the sequence again
-            vTaskDelay(pdMS_TO_TICKS(700));
+            // alarm_sound_one();
+            alarm_sound_mp3();    
         } else {
             vTaskDelay(pdMS_TO_TICKS(50));
         }
@@ -101,33 +122,24 @@ void play_volume_beep() {
     play_beep(800, 80);
 }
 
-void play_click() {
-    play_beep(1200, 30);
+void play_button_click_sound() {
+    play_sound(button_click_sound, button_click_sound_len);
 }
 
-void play_sound(const int16_t* samples, uint32_t num_samples, bool stereo) {
+
+void play_sound(const uint8_t* audio_data, uint32_t length_in_bytes) {
     if (!audio_ready) {
         Serial.println("Audio not ready!");
         return;
     }
     
-    // Wait for the lock before writing to I2S
+    // Wait for the lock so we don't crash the UI
     if (xSemaphoreTake(i2s_mutex, portMAX_DELAY)) {
-        if (stereo) {
-            i2s.write((uint8_t*)samples, num_samples * sizeof(int16_t));
-        } else {
-            for (uint32_t i = 0; i < num_samples; i++) {
-                int16_t sample = pgm_read_word(&samples[i]);
-                int16_t stereo_sample[2] = {sample, sample};
-                i2s.write((uint8_t*)stereo_sample, sizeof(stereo_sample));
-            }
-        }
+        
+        // Let the ESP32 DMA hardware do all the heavy lifting!
+        i2s.write((uint8_t*)audio_data, length_in_bytes);
+        
         // Release the lock
         xSemaphoreGive(i2s_mutex);
     }
 }
-
-void play_bop() {
-    play_sound(bop_sound, bop_sound_len, false);
-}
-

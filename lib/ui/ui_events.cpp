@@ -26,8 +26,7 @@ lv_obj_t * blackout_shield = NULL;
 #define WAKE_BUTTON_PIN GPIO_NUM_0 
 void toggleTurnOff(lv_event_t * e)
 {        
-    Serial.println("Shutting down...");
-    
+    Serial.println("Shutting down...");    
     // 1. Turn off the display using the GFX library to stop it from drawing current
     if (gfx) {
         gfx->displayOff(); 
@@ -237,4 +236,10 @@ void turnOffBacklight(lv_event_t * e)
     delay(500);
     destroy_message();
 	toggleScreenOff(e);
+}
+
+void playButtonClickedSound(lv_event_t * e)
+{
+    //some button was clicked, play sound
+	play_button_click_sound();
 }

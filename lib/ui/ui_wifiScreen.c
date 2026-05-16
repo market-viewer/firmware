@@ -43,6 +43,7 @@ void ui_event_wifiConfigButton(lv_event_t * e)
 
     if(event_code == LV_EVENT_CLICKED) {
         openWifiPortal(e);
+        playButtonClickedSound(e);
     }
 }
 
@@ -52,6 +53,7 @@ void ui_event_wifiResetButton(lv_event_t * e)
 
     if(event_code == LV_EVENT_CLICKED) {
         resetWifiConfig(e);
+        playButtonClickedSound(e);
     }
 }
 
@@ -61,6 +63,7 @@ void ui_event_volumeButtonBack2(lv_event_t * e)
 
     if(event_code == LV_EVENT_CLICKED) {
         _ui_screen_change(&ui_homeScreen, LV_SCR_LOAD_ANIM_NONE, 0, 0, &ui_homeScreen_screen_init);
+        playButtonClickedSound(e);
     }
 }
 

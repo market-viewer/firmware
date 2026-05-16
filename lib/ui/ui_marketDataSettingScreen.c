@@ -37,6 +37,7 @@ void ui_event_simpleDisplaySwitch(lv_event_t * e)
 
     if(event_code == LV_EVENT_CLICKED) {
         simpleDisplaySwitchToggle(e);
+        playButtonClickedSound(e);
     }
 }
 
@@ -46,6 +47,7 @@ void ui_event_displayGraphSwitch(lv_event_t * e)
 
     if(event_code == LV_EVENT_CLICKED) {
         displayGraphSwitchToggle(e);
+        playButtonClickedSound(e);
     }
 }
 
@@ -55,6 +57,7 @@ void ui_event_candleChartSwitch(lv_event_t * e)
 
     if(event_code == LV_EVENT_CLICKED) {
         candleChartSwitchToggle(e);
+        playButtonClickedSound(e);
     }
 }
 
