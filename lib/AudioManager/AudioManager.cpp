@@ -1,7 +1,7 @@
 #include "AudioManager.h"
 #include "HardwareDriver.h"
 #include <math.h>
-#include "sounds/good_boy_sound.h"
+#include "sounds/alarm_sound.h"
 #include "sounds/button_click_sound.h"
 
 #define SAMPLE_RATE 16000
@@ -41,8 +41,8 @@ void alarm_sound_two() {
     vTaskDelay(pdMS_TO_TICKS(1000));
 }
 
-void alarm_sound_mp3() {
-    play_sound(good_boy_sound, good_boy_sound_len);
+void play_alarm_sound_audio() {
+    play_sound(alarm_sound, alarm_sound_len);
     vTaskDelay(pdMS_TO_TICKS(500));
 }
 
@@ -51,7 +51,7 @@ void alarm_background_task(void *pvParameters) {
     while (true) {
         if (is_alarm_ringing) {
             // alarm_sound_one();
-            alarm_sound_mp3();    
+            play_alarm_sound_audio();    
         } else {
             vTaskDelay(pdMS_TO_TICKS(50));
         }

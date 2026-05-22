@@ -9,8 +9,13 @@
 #include "TimerScreen.h"
 
 
+
 // Double Buffering for smooth UI
 static lv_disp_draw_buf_t draw_buf;
+
+#define WAKE_BUTTON_PIN 0
+static bool lastWakeButtonState = HIGH;
+static unsigned long lastWakeButtonTime = 0;
 
 void example_increase_lvgl_tick(void *arg) {
     lv_tick_inc(2); // Tell LVGL 2ms passed
@@ -234,6 +239,18 @@ void updateScreen() {
         load_screen_by_index(endedTimerScreenIndex, false);
         activeScreenIndex = endedTimerScreenIndex;
     }
+}
+
+void checkHomeButtonPress() {
+    // check the button to return to the home screen
+    bool currentButtonState = digitalRead(WAKE_BUTTON_PIN);
+    if (currentButtonState == LOW && lastWakeButtonState == HIGH) {
+        if (millis() - lastWakeButtonTime > 200) { // debounce
+            go_to_home_screen();
+            lastWakeButtonTime = millis();
+        }
+    }
+    lastWakeButtonState = currentButtonState;
 }
 
 void updateScreenForce() {
