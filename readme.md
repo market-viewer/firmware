@@ -18,6 +18,12 @@
 * **Enclosure:** Custom 3D-printed case (currently in development).
 * **Setup:** Plug-and-play. No soldering or hardware modifications are required—simply upload the code to the device.
 
+## Setup device
+1) Download the .bin file from releases (firmware-merged.bin)
+2) Open any web app for code flashing eg. [here](https://esptool.spacehuhn.com/)
+3) Connect the device and the upload the firmware-merged.bin file and flash it
+4) Unplug and plug back in the device -> i will boot with the market viewer firmware 
+
 ## Connectivity & Configuration
 
 The device connects to WiFi to fetch real-time market data. Configuration is handled through captive portal. 
