@@ -14,6 +14,7 @@ SET(SOURCES ui_homeScreen.c
     ui_comp_hook.c
     ui_helpers.c
     ui_events.cpp
+    ui_img_1899080439.c
     ui_img_1314322640.c
     ui_img_650757212.c
     ui_img_1826884842.c

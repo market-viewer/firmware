@@ -6,6 +6,7 @@
 #include "ui.h"
 
 lv_obj_t * ui_homeScreen = NULL;
+lv_obj_t * ui_mvLogoBig = NULL;
 lv_obj_t * ui_homeLabel = NULL;
 lv_obj_t * ui_homeContainerMain = NULL;
 lv_obj_t * ui_Panel1 = NULL;
@@ -121,6 +122,18 @@ void ui_homeScreen_screen_init(void)
     lv_obj_clear_flag(ui_homeScreen, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
     lv_obj_set_style_bg_color(ui_homeScreen, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_bg_opa(ui_homeScreen, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    ui_mvLogoBig = lv_img_create(ui_homeScreen);
+    lv_img_set_src(ui_mvLogoBig, &ui_img_1899080439);
+    lv_obj_set_width(ui_mvLogoBig, LV_SIZE_CONTENT);   /// 300
+    lv_obj_set_height(ui_mvLogoBig, LV_SIZE_CONTENT);    /// 300
+    lv_obj_set_x(ui_mvLogoBig, 6);
+    lv_obj_set_y(ui_mvLogoBig, -2);
+    lv_obj_set_align(ui_mvLogoBig, LV_ALIGN_CENTER);
+    lv_obj_add_flag(ui_mvLogoBig, LV_OBJ_FLAG_HIDDEN | LV_OBJ_FLAG_ADV_HITTEST);     /// Flags
+    lv_obj_clear_flag(ui_mvLogoBig, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    lv_obj_set_style_img_recolor(ui_mvLogoBig, lv_color_hex(0x000000), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_img_recolor_opa(ui_mvLogoBig, 220, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_homeLabel = lv_label_create(ui_homeScreen);
     lv_obj_set_width(ui_homeLabel, LV_SIZE_CONTENT);   /// 1
@@ -352,6 +365,7 @@ void ui_homeScreen_screen_destroy(void)
 
     // NULL screen variables
     ui_homeScreen = NULL;
+    ui_mvLogoBig = NULL;
     ui_homeLabel = NULL;
     ui_homeContainerMain = NULL;
     ui_Panel1 = NULL;

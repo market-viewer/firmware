@@ -15,6 +15,7 @@ extern void ui_homeScreen_screen_init(void);
 extern void ui_homeScreen_screen_destroy(void);
 extern void ui_event_homeScreen(lv_event_t * e);
 extern lv_obj_t * ui_homeScreen;
+extern lv_obj_t * ui_mvLogoBig;
 extern lv_obj_t * ui_homeLabel;
 extern lv_obj_t * ui_homeContainerMain;
 extern lv_obj_t * ui_Panel1;

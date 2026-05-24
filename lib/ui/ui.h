@@ -49,6 +49,7 @@ extern lv_anim_t * elementBlink_Animation(lv_obj_t * TargetObject, int delay);
 extern lv_obj_t * ui____initial_actions0;
 
 // IMAGES AND IMAGE SETS
+LV_IMG_DECLARE(ui_img_1899080439);    // assets/mv-logo-device.png
 LV_IMG_DECLARE(ui_img_1314322640);    // assets/power-icon.png
 LV_IMG_DECLARE(ui_img_650757212);    // assets/reboot-icon.png
 LV_IMG_DECLARE(ui_img_1826884842);    // assets/brightness-icon.png
