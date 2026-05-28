@@ -10,6 +10,16 @@
   <video src="https://github.com/user-attachments/assets/b56ecb47-9974-42d9-ace1-55701b0bc220" width="500" controls></video>
 </div>
 
+## Features
+
+| Screen Type | Description |
+| :--- | :--- |
+| **Crypto screen** | Displays any crypto ticker with chart and percentage change for specified time frame |
+| **Stock screen** | Displays any stock ticker with chart and percentage change for specified time frame |
+| **Clock** | Analog or digital clock, with any time zone |
+| **Stopwatch & timer** | Stopwatch and timer (up to 24h) |
+| **Home/settings** | Change brightness, volume, manage screens, set up Wi-Fi, reboot device, ... |
+
 ## Hardware & Setup
 
 * **Device:** [Waveshare ESP32-S3 Touch AMOLED 1.75" Display](https://www.waveshare.com/esp32-s3-touch-amoled-1.75.htm?sku=31261)
