@@ -1,13 +1,11 @@
 # Market Viewer
 
 *Firmware for the Market Viewer device.*
-
-> ⚠️ **Notice:** This project is currently a work in progress.
-
 <br>
 
 <div align="center">
-  <img src="https://github.com/user-attachments/assets/3431bec9-e6ef-4cb4-9675-bf4994966695" alt="Market Viewer Screens" width="600">
+  
+  <img height="500" alt="readme-showcase" src="https://github.com/user-attachments/assets/caf46d9b-9e9c-44b2-a5e3-fd493af625db" />
   <br><br>
   <video src="https://github.com/user-attachments/assets/b56ecb47-9974-42d9-ace1-55701b0bc220" width="500" controls></video>
 </div>
@@ -15,7 +13,7 @@
 ## Hardware & Setup
 
 * **Device:** [Waveshare ESP32-S3 Touch AMOLED 1.75" Display](https://www.waveshare.com/esp32-s3-touch-amoled-1.75.htm?sku=31261)
-* **Enclosure:** Custom 3D-printed case (currently in development).
+* **Enclosure:** [3D-printed](https://github.com/market-viewer/3d-model).
 * **Setup:** Plug-and-play. No soldering or hardware modifications are required—simply upload the code to the device.
 
 ## Setup device
