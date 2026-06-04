@@ -7,7 +7,6 @@
   
   <img height="500" alt="readme-showcase" src="https://github.com/user-attachments/assets/caf46d9b-9e9c-44b2-a5e3-fd493af625db" />
   <br><br>
-  <video src="https://github.com/user-attachments/assets/b56ecb47-9974-42d9-ace1-55701b0bc220" width="500" controls></video>
 </div>
 
 ## Features
@@ -53,3 +52,5 @@ This firmware requires the [Market Viewer API](https://github.com/market-viewer/
 
 **Bring Your Own Key (BYOK):**
 The backend relies on third-party data providers (CoinGecko and TwelveData). You will need to create your own API keys for these services, both of which are free suitable for personal use.
+
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/R6R71KF055)
