@@ -10,6 +10,13 @@ void showBootScreen() {
 
   lv_obj_t* bootLogoBig = lv_img_create(loading_scr);
   lv_img_set_src(bootLogoBig, &img_logo_big);
+
+  //set the color to white
+  lv_obj_set_style_img_recolor(bootLogoBig, lv_color_hex(0xFFFFFF), LV_PART_MAIN);
+  lv_obj_set_style_img_recolor_opa(bootLogoBig, 255, LV_PART_MAIN);
+  
+  
+  lv_obj_center(bootLogoBig);
   lv_obj_set_width(bootLogoBig, LV_SIZE_CONTENT);   /// 300
   lv_obj_set_height(bootLogoBig, LV_SIZE_CONTENT);    /// 300
   lv_obj_set_x(bootLogoBig, 0);
@@ -27,7 +34,8 @@ void showBootScreen() {
 
 void deleteBootScreen() {
   if (loading_scr != NULL) {
-    loadScreen(SCREEN_ID_HOME_SCREEN);
+    lv_scr_load(objects.home_screen);
+    // loadScreen(SCREEN_ID_HOME_SCREEN);
 
     lv_obj_del(loading_scr);
     loading_scr = NULL;

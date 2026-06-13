@@ -7,9 +7,6 @@
 extern "C" {
 #endif
 
-extern void action_next_screen(lv_event_t * e);
-extern void action_toggle_turn_off(lv_event_t * e);
-extern void action_play_button_clicked_sound(lv_event_t * e);
 extern void action_restart_device(lv_event_t * e);
 extern void action_nav_to_brightness_scr(lv_event_t * e);
 extern void action_nav_to_volume_scr(lv_event_t * e);
@@ -36,8 +33,10 @@ extern void action_finance_screen_gesture(lv_event_t * e);
 extern void action_market_data_setting_screen_load(lv_event_t * e);
 extern void action_exit_market_data_setting(lv_event_t * e);
 extern void action_turn_off_device(lv_event_t * e);
-extern void action_toggle_roation_settings(lv_event_t * e);
+extern void action_toggle_rotation_settings(lv_event_t * e);
 extern void action_set_volume_from_arc(lv_event_t * e);
+extern void action_home_next_screen(lv_event_t * e);
+extern void action_toggle_market_screen_setting(lv_event_t * e);
 
 #ifdef __cplusplus
 }

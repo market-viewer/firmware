@@ -4,7 +4,11 @@
 #include <Arduino.h>
 #include "BaseScreen.h"
 #include "ui.h"
+#include "screens.h"
 
+//general
+void loadScreenNoAnim(enum ScreensEnum screenId);
+bool changeScreenOnSwipe();
 
 //wifi screen
 void changeWifiScreenNotConnected();

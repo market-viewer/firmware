@@ -9,12 +9,37 @@
 #include "StockScreen.h"
 #include "TimerScreen.h"
 #include "fonts.h"
+#include "GuiManager.h"
 
 static Preferences preferences;
 
 extern bool isScreenOff;
 extern int currentBrightness;
 static lv_obj_t* blackout_shield = NULL;
+
+void loadScreenNoAnim(enum ScreensEnum screenId) {
+    lv_obj_t *screen = ((lv_obj_t **)&objects)[screenId - 1];
+    
+    lv_scr_load(screen);
+}
+
+bool changeScreenOnSwipe() {
+    if (lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_LEFT) {
+		lv_indev_wait_release(lv_indev_get_act());
+        go_next_screen();
+        
+        return true;
+    } else if (lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_RIGHT) {
+		lv_indev_wait_release(lv_indev_get_act());
+        go_prev_screen();
+
+        return true;
+	}
+
+    return false;
+}
+
+
 
 void changeWifiScreenNotConnected() {
     //change the connection status

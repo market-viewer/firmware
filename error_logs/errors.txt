@@ -1,0 +1,69 @@
+ELF file SHA256: cdf0f179d
+
+Rebooting...
+ESP-ROM:esp32s3-20210327
+Build:Mar 27 2021
+rst:0xc (RTC_SW_CPU_RST),boot:0x2b (SPI_FAST_FLASH_BOOT)
+Saved PC:0x4037af3a
+SPIWP:0xee
+mode:DIO, clock div:1
+load:0x3fce2820,len:0x116c
+load:0x403c8700,len:0xc2c
+load:0x403cb700,len:0x3108
+entry 0x403c88b8
+[    41][I][esp32-hal-i2c-ng.c:112] i2cInit(): Initializing I2C Master: num=0 sda=15 scl=14 freq=100000
+[   100][W][Wire.cpp:300] begin(): Bus already started in Master Mode.
+[   158][I][TouchDrvCST92xx.cpp:483] getAttribute(): Chip checkcode:0xcaca4e20.
+[   166][I][TouchDrvCST92xx.cpp:490] getAttribute(): Chip resolution X:466 Y:466
+[   174][I][TouchDrvCST92xx.cpp:503] getAttribute(): Chip type :0x9217, ProjectID:0X5734
+[   183][I][TouchDrvCST92xx.cpp:526] getAttribute(): Chip ic version:0x1000001, checksum:0x693275ee
+[   192][W][Wire.cpp:300] begin(): Bus already started in Master Mode.
+Audio initialized successfully!
+All screens cleared
+AudioManager ready!
+hi
+WiFi Config initialized
+Configured: Yes
+..[  2433][W][STA.cpp:137] _onStaArduinoEvent(): Reason: 203 - ASSOC_FAIL
+....
+WiFi connected!
+IP: 192.168.1.102
+Loaded brightness: 44
+Mapped volume: 78
+Loaded volume: 56
+Loaded rotation: Yes
+Hardware settings loaded from preferences
+All screens cleared
+Added screen: Crypto: bitcoin
+Added screen: Clock (America/New_York)
+Added screen: Timer (test timer)
+Added screen: Stock: AAPL
+Added screen: Clock (Europe/Prague)
+Fetched 5 screens
+System Ready!
+Guru Meditation Error: Core  1 panic'ed (LoadProhibited). Exception was unhandled.
+
+Core  1 register dump:
+PC      : 0x4200b164  PS      : 0x00060230  A0      : 0x8200e9b1  A1      : 0x3fcebf90  
+A2      : 0x00000004  A3      : 0x00000000  A4      : 0x00000000  A5      : 0x00000000  
+A6      : 0x3fc9dc89  A7      : 0x00000000  A8      : 0x8200b160  A9      : 0x3fcebf70  
+A10     : 0x00000000  A11     : 0x3fcebff8  A12     : 0x8037e040  A13     : 0x3fc9b940  
+A14     : 0x3fcebf9c  A15     : 0x3fcebf9e  SAR     : 0x0000001a  EXCCAUSE: 0x0000001c  
+EXCVADDR: 0x00000022  LBEG    : 0x40056f5c  LEND    : 0x40056f72  LCOUNT  : 0xffffffff  
+
+
+Backtrace: 0x4200b161:0x3fcebf90 0x4200e9ae:0x3fcebfb0 0x42021762:0x3fcec030 0x4204652b:0x3fcec060 0x42046663:0x3fcec080 0x4204da84:0x3fcec0a0 0x4037f5f5:0x3fcec0c0
+
+
+
+
+ELF file SHA256: cdf0f179d
+
+Rebooting...
+ESP-ROM:esp32s3-20210327
+Build:Mar 27 2021
+rst:0xc (RTC_SW_CPU_RST),boot:0x2b (SPI_FAST_FLASH_BOOT)
+Saved PC:0x4037af3a
+SPIWP:0xee
+mode:DIO, clock div:1
+load:0x3fce2820,len:0x116c

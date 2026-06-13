@@ -17,11 +17,11 @@ void setup() {
   //initialize Hardware (Screen, Touch, I2C)
   init_hardware();
 
-  //initialize audio 
-  init_audio_manager();
-  
   //initialize LVGL (Buffers, UI)
   init_lvgl_interface();
+
+  //initialize audio 
+  init_audio_manager();
 
   //show loading screen
   showBootScreen();

@@ -67,12 +67,12 @@ void init_hardware() {
     
     //init touch
     touch.setPins(TP_RESET, TP_INT);
-    touch.begin(Wire, 0x5A, IIC_SDA, IIC_SCL);
+    touch.begin(Wire, 0x5A);
     touch.setMaxCoordinates(466, 466);
     touch.setMirrorXY(true, true);
 
     //init sensor
-    qmi.begin(Wire, QMI8658_L_SLAVE_ADDRESS, IIC_SDA, IIC_SCL);
+    qmi.begin(Wire, QMI8658_L_SLAVE_ADDRESS);
     qmi.configAccelerometer(SensorQMI8658::ACC_RANGE_4G, SensorQMI8658::ACC_ODR_1000Hz, SensorQMI8658::LPF_MODE_0);
     qmi.enableAccelerometer();
 

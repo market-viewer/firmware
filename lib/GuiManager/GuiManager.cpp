@@ -137,7 +137,8 @@ void init_lvgl_interface() {
 
     lv_disp_set_rotation(NULL, (lv_disp_rot_t)1); // rotate by default that the usb port is a top
 
-    ui_init();
+    // ui_init();
+    create_screens();
 
     init_screens_manager();
 }
