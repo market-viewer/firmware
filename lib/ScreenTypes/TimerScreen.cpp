@@ -1,15 +1,13 @@
 #include "TimerScreen.h"
 #include "ui.h"
 #include "AudioManager.h"
-
-#define ICON_PLAY &ui_img_1970864515
-#define ICON_PAUSE &ui_img_81954201
+#include "images.h"
 
 const char* endScreenDisplayText = "End!";
 
 void TimerScreen::render() {
     //update the vlaues
-    lv_label_set_text(ui_timerNameLabel, name.c_str());
+    lv_label_set_text(objects.timer_name_label, name.c_str());
 
     if (isRunning) {
         startTimerUIUpdate();
@@ -21,15 +19,15 @@ void TimerScreen::render() {
         }
         //update the play button
         if (isPaused) {
-            lv_obj_set_style_bg_img_src(ui_timerPlayPauseButton, ICON_PLAY, LV_PART_MAIN);
+            lv_obj_set_style_bg_img_src(objects.timer_play_pause_button, &img_play_icon, LV_PART_MAIN);
         }
 
         //handle timer end screen
         if (isTimerAtZero()) {
-            lv_label_set_text(ui_timerTimeLabel, endScreenDisplayText);
-            lv_obj_add_state(ui_timerPlayPauseButton, LV_STATE_DISABLED);
+            lv_label_set_text(objects.timer_time_label, endScreenDisplayText);
+            lv_obj_add_state(objects.timer_play_pause_button, LV_STATE_DISABLED);
         } else {
-            lv_obj_clear_state(ui_timerPlayPauseButton, LV_STATE_DISABLED);
+            lv_obj_clear_state(objects.timer_play_pause_button, LV_STATE_DISABLED);
         }
         
     } else {
@@ -42,37 +40,37 @@ void TimerScreen::resetTimer() {
     if (isRunning) {
         resetRunningTimer();
     } else {
-        lv_roller_set_selected(ui_hourRoller, 0, LV_ANIM_ON);
-        lv_roller_set_selected(ui_minuteRoller, 0, LV_ANIM_ON);
-        lv_roller_set_selected(ui_secondRoller, 0, LV_ANIM_ON);
+        lv_roller_set_selected(objects.hour_roller, 0, LV_ANIM_ON);
+        lv_roller_set_selected(objects.minute_roller, 0, LV_ANIM_ON);
+        lv_roller_set_selected(objects.second_roller, 0, LV_ANIM_ON);
     }
 
 }
 
 void TimerScreen::loadTimerValues() {
-    hour = lv_roller_get_selected(ui_hourRoller);
-    minute = lv_roller_get_selected(ui_minuteRoller);
-    second = lv_roller_get_selected(ui_secondRoller);
+    hour = lv_roller_get_selected(objects.hour_roller);
+    minute = lv_roller_get_selected(objects.minute_roller);
+    second = lv_roller_get_selected(objects.second_roller);
     timerTotalSeconds = hour * 60 * 60 + minute * 60 + second; 
 }
 
 void TimerScreen::startTimerUIUpdate() {
-    lv_obj_add_flag(ui_hourRoller, LV_OBJ_FLAG_HIDDEN);
-    lv_obj_add_flag(ui_minuteRoller, LV_OBJ_FLAG_HIDDEN);
-    lv_obj_add_flag(ui_secondRoller, LV_OBJ_FLAG_HIDDEN);
-    lv_obj_add_flag(ui_timerDescriptionSelectorLabel, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(objects.hour_roller, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(objects.minute_roller, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(objects.second_roller, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(objects.timer_description_selector_label, LV_OBJ_FLAG_HIDDEN);
     
-    lv_obj_clear_flag(ui_timerArc, LV_OBJ_FLAG_HIDDEN);
-    lv_obj_clear_flag(ui_timerTimeLabel, LV_OBJ_FLAG_HIDDEN);
-    lv_obj_clear_flag(ui_timerIcon, LV_OBJ_FLAG_HIDDEN);
-    lv_obj_clear_flag(ui_timerNameLabel, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_clear_flag(objects.timer_arc, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_clear_flag(objects.timer_time_label, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_clear_flag(objects.timer_icon, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_clear_flag(objects.timer_name_label, LV_OBJ_FLAG_HIDDEN);
 
     char timeText[16];
     snprintf(timeText, sizeof(timeText), "%02d:%02d:%02d", hour, minute, second);
-    lv_label_set_text(ui_timerTimeLabel, timeText);
+    lv_label_set_text(objects.timer_time_label, timeText);
 
     //update the play button icon
-    lv_obj_set_style_bg_img_src(ui_timerPlayPauseButton, ICON_PAUSE, LV_PART_MAIN);
+    lv_obj_set_style_bg_img_src(objects.timer_play_pause_button, &img_pause_icon, LV_PART_MAIN);
 }
 
 void TimerScreen::resetRunningTimer() {
@@ -83,24 +81,24 @@ void TimerScreen::resetRunningTimer() {
 }
 
 void TimerScreen::resetTimerUIUpdate() {
-    lv_obj_clear_flag(ui_hourRoller, LV_OBJ_FLAG_HIDDEN);
-    lv_obj_clear_flag(ui_minuteRoller, LV_OBJ_FLAG_HIDDEN);
-    lv_obj_clear_flag(ui_secondRoller, LV_OBJ_FLAG_HIDDEN);
-    lv_obj_clear_flag(ui_timerDescriptionSelectorLabel, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_clear_flag(objects.hour_roller, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_clear_flag(objects.minute_roller, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_clear_flag(objects.second_roller, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_clear_flag(objects.timer_description_selector_label, LV_OBJ_FLAG_HIDDEN);
 
-    lv_obj_add_flag(ui_timerArc, LV_OBJ_FLAG_HIDDEN);
-    lv_obj_add_flag(ui_timerTimeLabel, LV_OBJ_FLAG_HIDDEN);
-    lv_obj_add_flag(ui_timerIcon, LV_OBJ_FLAG_HIDDEN);
-    lv_obj_add_flag(ui_timerNameLabel, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(objects.timer_arc, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(objects.timer_time_label, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(objects.timer_icon, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(objects.timer_name_label, LV_OBJ_FLAG_HIDDEN);
 
     //update the play button icon
-    lv_obj_set_style_bg_img_src(ui_timerPlayPauseButton, ICON_PLAY, LV_PART_MAIN);
-    lv_obj_clear_state(ui_timerPlayPauseButton, LV_STATE_DISABLED);
+    lv_obj_set_style_bg_img_src(objects.timer_play_pause_button, &img_play_icon, LV_PART_MAIN);
+    lv_obj_clear_state(objects.timer_play_pause_button, LV_STATE_DISABLED);
 }
 
 void TimerScreen::timerEndUIUpdate() {
-    lv_label_set_text(ui_timerTimeLabel, endScreenDisplayText);
-    lv_obj_add_state(ui_timerPlayPauseButton, LV_STATE_DISABLED);
+    lv_label_set_text(objects.timer_time_label, endScreenDisplayText);
+    lv_obj_add_state(objects.timer_play_pause_button, LV_STATE_DISABLED);
 }
 
 
@@ -173,13 +171,13 @@ void TimerScreen::updateTimerUI() {
     
 
     //update digial clock
-    lv_label_set_text(ui_timerTimeLabel, timeText);
+    lv_label_set_text(objects.timer_time_label, timeText);
 
     //update arc
     int remainingSeconds = hour * 60 * 60 + minute * 60 + second;
     int arcValue =  (remainingSeconds * 1000) / timerTotalSeconds;
 
-    lv_arc_set_value(ui_timerArc, arcValue);
+    lv_arc_set_value(objects.timer_arc, arcValue);
 }
 
 void TimerScreen::updateStopwatch(bool updateUI) {
@@ -214,19 +212,19 @@ void TimerScreen::updateStopwatchUI() {
     }
     
     //update digial clock
-    lv_label_set_text(ui_timerTimeLabel, timeText);
+    lv_label_set_text(objects.timer_time_label, timeText);
     int arcValue =  second * 1000 / 60;
-    lv_arc_set_value(ui_timerArc, arcValue);
+    lv_arc_set_value(objects.timer_arc, arcValue);
 }
 
 void TimerScreen::togglePauseTimer() {
     if (isPaused) {
         isPaused = false;
         last_tick = millis();
-        lv_obj_set_style_bg_img_src(ui_timerPlayPauseButton, ICON_PAUSE, LV_PART_MAIN);
+        lv_obj_set_style_bg_img_src(objects.timer_play_pause_button, &img_pause_icon, LV_PART_MAIN);
     } else {
         isPaused = true;
-        lv_obj_set_style_bg_img_src(ui_timerPlayPauseButton, ICON_PLAY, LV_PART_MAIN);
+        lv_obj_set_style_bg_img_src(objects.timer_play_pause_button, &img_play_icon, LV_PART_MAIN);
     }
 
 }

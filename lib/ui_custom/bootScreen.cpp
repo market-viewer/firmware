@@ -1,4 +1,6 @@
 #include "bootScreen.h"
+#include "ui.h"
+#include "images.h"
 
 static lv_obj_t* loading_scr = NULL;
 
@@ -7,7 +9,7 @@ void showBootScreen() {
   lv_obj_set_style_bg_color(loading_scr, lv_color_hex(0x000000), 0); // Black background
 
   lv_obj_t* bootLogoBig = lv_img_create(loading_scr);
-  lv_img_set_src(bootLogoBig, &ui_img_1899080439);
+  lv_img_set_src(bootLogoBig, &img_logo_big);
   lv_obj_set_width(bootLogoBig, LV_SIZE_CONTENT);   /// 300
   lv_obj_set_height(bootLogoBig, LV_SIZE_CONTENT);    /// 300
   lv_obj_set_x(bootLogoBig, 0);
@@ -25,7 +27,7 @@ void showBootScreen() {
 
 void deleteBootScreen() {
   if (loading_scr != NULL) {
-    lv_disp_load_scr(ui_homeScreen);
+    loadScreen(SCREEN_ID_HOME_SCREEN);
 
     lv_obj_del(loading_scr);
     loading_scr = NULL;

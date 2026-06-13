@@ -1,4 +1,5 @@
 #include "utils.h"
+#include "fonts.h"
 #include <algorithm> 
 #include <cstdio>
 #include <format>
@@ -67,10 +68,10 @@ std::string build_price_change_label(double priceChange) {
 }
 
 const lv_font_t* availableFonts[] = {
-    &ui_font_monoBold100,
-    &ui_font_monoBold80,
-    &ui_font_monoBold60,
-    &ui_font_monoBold50,
+    &ui_font_mono_bold100,
+    &ui_font_mono_bold80,
+    &ui_font_mono40,
+    &ui_font_mono30,
 };
 
 const lv_font_t* select_correct_font_size(std::string priceLabel, int labelWidth) {

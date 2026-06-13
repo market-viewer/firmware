@@ -1,10 +1,12 @@
 #include "StockScreen.h"
 #include "ui.h"
+#include "screens.h"
+#include "images.h"
 #include "messageDisplay.h"
 #include "HttpRequestManager.h"
 #include "utils.h"
 #include "string"
-#include "graphDrawer.h"
+#include "graph_drawer.h"
 #include "colors.h"
 
 void StockScreen::render() {
@@ -17,18 +19,18 @@ void StockScreen::render() {
 
     //select right font size based on price label size
     const lv_font_t* correctFont = select_correct_font_size(formattedPrice, 450);
-    lv_obj_set_style_text_font(ui_cryptoPriceLabel, correctFont, LV_PART_MAIN);
+    lv_obj_set_style_text_font(objects.stock_price_label, correctFont, LV_PART_MAIN);
 
     //set values
-    lv_label_set_text(ui_stockPriceLabel, formattedPrice.c_str());
-    lv_label_set_text(ui_stockTimeFrameLabel, timeFrame.c_str());
-    lv_label_set_text(ui_stockSymbolCurrencyLabel, assetPlusCurrency.c_str());
+    lv_label_set_text(objects.stock_price_label, formattedPrice.c_str());
+    lv_label_set_text(objects.stock_time_frame_label, timeFrame.c_str());
+    lv_label_set_text(objects.stock_symbol_currency_label, assetPlusCurrency.c_str());
     
     //update colors
     if (priceChange >= 0) {
-        lv_obj_set_style_bg_img_src(ui_stockScreen, &ui_img_green_background_png, LV_PART_MAIN);
+        lv_obj_set_style_bg_img_src(objects.stock_screen, &img_background_green, LV_PART_MAIN);
     } else {
-        lv_obj_set_style_bg_img_src(ui_stockScreen, &ui_img_red_background_png, LV_PART_MAIN);
+        lv_obj_set_style_bg_img_src(objects.stock_screen, &img_background_red, LV_PART_MAIN);
     }
 
     //handle simple display and normal display
@@ -49,38 +51,38 @@ void StockScreen::render() {
 
 void StockScreen::renderNormal() {
     //show all widgets
-    lv_obj_clear_flag(ui_stockPriceChangeLabel, LV_OBJ_FLAG_HIDDEN);    
-    lv_obj_clear_flag(ui_stockNameLabel, LV_OBJ_FLAG_HIDDEN);    
-    lv_obj_clear_flag(ui_stockMarketOpenCont, LV_OBJ_FLAG_HIDDEN);   
+    lv_obj_clear_flag(objects.stock_price_change_label, LV_OBJ_FLAG_HIDDEN);    
+    lv_obj_clear_flag(objects.stock_name_label, LV_OBJ_FLAG_HIDDEN);    
+    lv_obj_clear_flag(objects.stock_market_open_cont, LV_OBJ_FLAG_HIDDEN);   
 
     //update widgets values
     std::string formattedPriceChange = build_price_change_label(priceChange).c_str();
-    lv_label_set_text(ui_stockPriceChangeLabel, formattedPriceChange.c_str());    
+    lv_label_set_text(objects.stock_price_change_label, formattedPriceChange.c_str());    
 
     //handle market dat open
     if (isMarketOpen) {
-        lv_label_set_text(ui_stockMarketOpenLabel, "OPEN");
-        lv_obj_set_style_bg_color(ui_stockMarketOpenIcon, lv_color_hex(greenColor), LV_PART_MAIN);
+        lv_label_set_text(objects.stock_market_open_label, "OPEN");
+        lv_obj_set_style_bg_color(objects.stock_market_open_icon, lv_color_hex(greenColor), LV_PART_MAIN);
     } else {
-        lv_label_set_text(ui_stockMarketOpenLabel, "CLOSED");
-        lv_obj_set_style_bg_color(ui_stockMarketOpenIcon, lv_color_hex(redColor), LV_PART_MAIN);
+        lv_label_set_text(objects.stock_market_open_label, "CLOSED");
+        lv_obj_set_style_bg_color(objects.stock_market_open_icon, lv_color_hex(redColor), LV_PART_MAIN);
     }
 
-    lv_label_set_text(ui_stockNameLabel, stockName.c_str());
+    lv_label_set_text(objects.stock_name_label, stockName.c_str());
 
     //chagne colors based on price change
     if (priceChange >= 0) {
-        lv_obj_set_style_bg_color(ui_stockPriceChangeLabel, lv_color_hex(greenColor), LV_PART_MAIN);
+        lv_obj_set_style_bg_color(objects.stock_price_change_label, lv_color_hex(greenColor), LV_PART_MAIN);
     } else {
-        lv_obj_set_style_bg_color(ui_stockPriceChangeLabel, lv_color_hex(redColor), LV_PART_MAIN);
+        lv_obj_set_style_bg_color(objects.stock_price_change_label, lv_color_hex(redColor), LV_PART_MAIN);
     }
  
 }
 void StockScreen::renderSimple() {
     //hide widgets for simple display
-    lv_obj_add_flag(ui_stockPriceChangeLabel, LV_OBJ_FLAG_HIDDEN);    
-    lv_obj_add_flag(ui_stockNameLabel, LV_OBJ_FLAG_HIDDEN);    
-    lv_obj_add_flag(ui_stockMarketOpenCont, LV_OBJ_FLAG_HIDDEN);     
+    lv_obj_add_flag(objects.stock_price_change_label, LV_OBJ_FLAG_HIDDEN);    
+    lv_obj_add_flag(objects.stock_name_label, LV_OBJ_FLAG_HIDDEN);    
+    lv_obj_add_flag(objects.stock_market_open_cont, LV_OBJ_FLAG_HIDDEN);     
 }
 
 

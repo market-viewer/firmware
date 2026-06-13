@@ -1,3 +1,4 @@
+#include <Network.h>
 #include <Arduino.h>
 #include <lvgl.h>
 #include "HardwareDriver.h"
@@ -6,7 +7,6 @@
 #include "WifiConfig.h"
 #include "startupEvents.h"
 #include "ScreensManager.h"
-#include "ui_events.h"
 #include "bootScreen.h"
 
 void setup() {

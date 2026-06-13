@@ -197,7 +197,7 @@ void load_screen_by_index(int index, bool goingFromSettings) {
 
     // handle home screen load
     if (index == -1) {
-        lv_scr_load(ui_homeScreen);
+        lv_scr_load(objects.home_screen);
         return;
     }
 
@@ -208,10 +208,10 @@ void load_screen_by_index(int index, bool goingFromSettings) {
     lv_obj_t* targetScreenUI = nullptr;
     
     switch (screenObj->getType()) {
-        case ScreenType::STOCK: targetScreenUI = ui_stockScreen; break;
-        case ScreenType::CRYPTO: targetScreenUI = ui_cryptoScreen; break;
-        case ScreenType::CLOCK: targetScreenUI = ui_clockScreen; break;
-        case ScreenType::TIMER: targetScreenUI = ui_timerScreen; break;
+        case ScreenType::STOCK: targetScreenUI = objects.stock_screen; break;
+        case ScreenType::CRYPTO: targetScreenUI = objects.crypto_screen; break;
+        case ScreenType::CLOCK: targetScreenUI = objects.clock_screen; break;
+        case ScreenType::TIMER: targetScreenUI = objects.timer_screen; break;
         default: return;
     }
 

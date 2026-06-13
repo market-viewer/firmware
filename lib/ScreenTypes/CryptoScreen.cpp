@@ -4,8 +4,9 @@
 #include "HttpRequestManager.h"
 #include "utils.h"
 #include "string"
-#include "graphDrawer.h"
+#include "graph_drawer.h"
 #include "colors.h"
+#include "images.h"
 
 
 void CryptoScreen::render() {
@@ -18,18 +19,18 @@ void CryptoScreen::render() {
 
     //select right font size based on price label size
     const lv_font_t* correctFont = select_correct_font_size(formattedPrice, 450);
-    lv_obj_set_style_text_font(ui_cryptoPriceLabel, correctFont, LV_PART_MAIN);
+    lv_obj_set_style_text_font(objects.crypto_price_label, correctFont, LV_PART_MAIN);
 
     //set values
-    lv_label_set_text(ui_cryptoPriceLabel, formattedPrice.c_str());
-    lv_label_set_text(ui_cryptoTimeFrameLabel, timeFrame.c_str());
-    lv_label_set_text(ui_cryptoAssetCurrencyLabel, assetPlusCurrency.c_str());
+    lv_label_set_text(objects.crypto_price_label, formattedPrice.c_str());
+    lv_label_set_text(objects.crypto_time_frame_label, timeFrame.c_str());
+    lv_label_set_text(objects.crypto_asset_currency_label, assetPlusCurrency.c_str());
     
     //update colors
     if (priceChange >= 0) {
-        lv_obj_set_style_bg_img_src(ui_cryptoScreen, &ui_img_green_background_png, LV_PART_MAIN);
+        lv_obj_set_style_bg_img_src(objects.crypto_screen, &img_background_green, LV_PART_MAIN);
     } else {
-        lv_obj_set_style_bg_img_src(ui_cryptoScreen, &ui_img_red_background_png, LV_PART_MAIN);
+        lv_obj_set_style_bg_img_src(objects.crypto_screen, &img_background_red, LV_PART_MAIN);
     }
 
     //handle simple display and normal display
@@ -50,11 +51,11 @@ void CryptoScreen::render() {
 
 void CryptoScreen::renderNormal() {
     //show all widgets
-    lv_obj_clear_flag(ui_cryptoPriceChangeLabel, LV_OBJ_FLAG_HIDDEN);    
-    lv_obj_clear_flag(ui_cryptoAthArc, LV_OBJ_FLAG_HIDDEN);    
-    lv_obj_clear_flag(ui_cryptoAthLabel, LV_OBJ_FLAG_HIDDEN);    
-    lv_obj_clear_flag(ui_cryptoAthChangeLabel, LV_OBJ_FLAG_HIDDEN);    
-    lv_obj_clear_flag(ui_cryptoZeroLabel1, LV_OBJ_FLAG_HIDDEN);   
+    lv_obj_clear_flag(objects.crypto_price_change_label, LV_OBJ_FLAG_HIDDEN);    
+    lv_obj_clear_flag(objects.crypto_ath_arc, LV_OBJ_FLAG_HIDDEN);    
+    lv_obj_clear_flag(objects.crypto_ath_label, LV_OBJ_FLAG_HIDDEN);    
+    lv_obj_clear_flag(objects.crypto_ath_change_label, LV_OBJ_FLAG_HIDDEN);    
+    lv_obj_clear_flag(objects.crypto_zero_label, LV_OBJ_FLAG_HIDDEN);   
 
     //update widgets values
     std::string formattedPriceChange = build_price_change_label(priceChange).c_str();
@@ -62,26 +63,26 @@ void CryptoScreen::renderNormal() {
     
     double athBarValue = 100 + athChange;
 
-    lv_label_set_text(ui_cryptoPriceChangeLabel, formattedPriceChange.c_str());
-    lv_label_set_text(ui_cryptoAthChangeLabel, formattedAthChange.c_str());
-    lv_arc_set_value(ui_cryptoAthArc, (int32_t)athBarValue);    
+    lv_label_set_text(objects.crypto_price_change_label, formattedPriceChange.c_str());
+    lv_label_set_text(objects.crypto_ath_change_label, formattedAthChange.c_str());
+    lv_arc_set_value(objects.crypto_ath_arc, (int32_t)athBarValue);    
 
     if (priceChange >= 0) {
-        lv_obj_set_style_bg_color(ui_cryptoPriceChangeLabel, lv_color_hex(greenColor), LV_PART_MAIN);
-        lv_obj_set_style_bg_color(ui_cryptoAthArc, lv_color_hex(greenColorKnob), LV_PART_KNOB);
+        lv_obj_set_style_bg_color(objects.crypto_price_change_label, lv_color_hex(greenColor), LV_PART_MAIN);
+        lv_obj_set_style_bg_color(objects.crypto_ath_arc, lv_color_hex(greenColorKnob), LV_PART_KNOB);
     } else {
-        lv_obj_set_style_bg_color(ui_cryptoPriceChangeLabel, lv_color_hex(redColor), LV_PART_MAIN);
-        lv_obj_set_style_bg_color(ui_cryptoAthArc, lv_color_hex(redColorKnob), LV_PART_KNOB);
+        lv_obj_set_style_bg_color(objects.crypto_price_change_label, lv_color_hex(redColor), LV_PART_MAIN);
+        lv_obj_set_style_bg_color(objects.crypto_ath_arc, lv_color_hex(redColorKnob), LV_PART_KNOB);
     }
  
 }
 void CryptoScreen::renderSimple() {
     //hide widgets for simple display
-    lv_obj_add_flag(ui_cryptoPriceChangeLabel, LV_OBJ_FLAG_HIDDEN);    
-    lv_obj_add_flag(ui_cryptoAthArc, LV_OBJ_FLAG_HIDDEN);    
-    lv_obj_add_flag(ui_cryptoAthLabel, LV_OBJ_FLAG_HIDDEN);    
-    lv_obj_add_flag(ui_cryptoAthChangeLabel, LV_OBJ_FLAG_HIDDEN);    
-    lv_obj_add_flag(ui_cryptoZeroLabel1, LV_OBJ_FLAG_HIDDEN);    
+    lv_obj_add_flag(objects.crypto_price_change_label, LV_OBJ_FLAG_HIDDEN);    
+    lv_obj_add_flag(objects.crypto_ath_arc, LV_OBJ_FLAG_HIDDEN);    
+    lv_obj_add_flag(objects.crypto_ath_label, LV_OBJ_FLAG_HIDDEN);    
+    lv_obj_add_flag(objects.crypto_ath_change_label, LV_OBJ_FLAG_HIDDEN);    
+    lv_obj_add_flag(objects.crypto_zero_label, LV_OBJ_FLAG_HIDDEN);    
 }
 
 
