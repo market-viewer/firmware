@@ -4,6 +4,7 @@
 #include "lv_conf.h"
 #include "ui.h"
 #include "ScreensManager.h"
+#include "AudioManager.h"
 #include "BaseScreen.h"
 #include "ClockScreen.h"
 #include "TimerScreen.h"
@@ -53,6 +54,7 @@ void my_touchpad_read(lv_indev_drv_t * drv, lv_indev_data_t * data) {
         data->state = LV_INDEV_STATE_PR;
         data->point.x = x;
         data->point.y = y;
+
     } else {
         data->state = LV_INDEV_STATE_REL;
     }

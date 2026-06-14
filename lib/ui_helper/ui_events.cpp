@@ -33,6 +33,8 @@ void action_home_next_screen(lv_event_t * e) {
 }
 
 void action_restart_device(lv_event_t * e) {
+    play_button_click_sound();
+
     show_info_message("Restarting device");
     delay(400);
     ESP.restart();
@@ -40,15 +42,21 @@ void action_restart_device(lv_event_t * e) {
 }
 
 void action_nav_to_brightness_scr(lv_event_t * e) {
+    play_button_click_sound();
+
 	loadScreenNoAnim(SCREEN_ID_BRIGHTNESS_SCREEN);
         
 }
 
 void action_nav_to_volume_scr(lv_event_t * e) {
+    play_button_click_sound();
+
 	loadScreenNoAnim(SCREEN_ID_VOLUME_SCREEN);
 }
 
 void action_turn_off_backlight(lv_event_t * e) {
+    play_button_click_sound();
+
     display_message("Click again to wake up.", MessageSeverity::INFO);
     delay(500);
     destroy_message();
@@ -56,19 +64,27 @@ void action_turn_off_backlight(lv_event_t * e) {
 }
 
 void action_nav_to_screens_scr(lv_event_t * e) {
+    play_button_click_sound();
+
 	loadScreenNoAnim(SCREEN_ID_SCREENS_SCREEN);
 }
 
 void action_toggle_rotation_settings(lv_event_t * e) {
+    play_button_click_sound();
+
     shouldRotate = !shouldRotate;
     saveHardwaveBoolToPreferences("rotation", shouldRotate);
 }
 
 void action_nav_to_wifi_scr(lv_event_t * e) {
+    play_button_click_sound();
+
 	loadScreenNoAnim(SCREEN_ID_WIFI_SCREEN);
 }
 
 void action_nav_to_home_scr(lv_event_t * e) {
+    play_button_click_sound();
+
 	loadScreenNoAnim(SCREEN_ID_HOME_SCREEN);
 }
 
@@ -86,6 +102,8 @@ void action_set_brightness_from_arc(lv_event_t * e) {
 }
 
 void action_open_wifi_portal(lv_event_t * e) {
+    play_button_click_sound();
+
     //show wifi credentials
     displayWifiConnectCredentials(true);
 
@@ -107,6 +125,8 @@ void action_open_wifi_portal(lv_event_t * e) {
 }
 
 void action_reset_wifi_config(lv_event_t * e) {
+    play_button_click_sound();
+
 	Serial.println("Resetting WiFi configuration...");
     show_info_message("Resetting device config");
     reset_wifi_config();
@@ -115,10 +135,14 @@ void action_reset_wifi_config(lv_event_t * e) {
 }
 
 void action_timer_reset_pressed(lv_event_t * e) {
+    play_button_click_sound();
+
 	resetTimer(get_active_screen());
 }
 
 void action_timer_start_pressed(lv_event_t * e) {
+    play_button_click_sound();
+
 	startTimerToggle(get_active_screen());
 }
 
@@ -187,6 +211,8 @@ void action_exit_market_data_setting(lv_event_t * e) {
 }
 
 void action_turn_off_device(lv_event_t * e) {
+    play_button_click_sound();
+
     Serial.println("Shutting down...");    
     if (gfx) {
         gfx->displayOff(); 

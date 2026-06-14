@@ -203,9 +203,10 @@ enum Colors {
     COLOR_ID_RED_DARKEST,
     COLOR_ID_RED_PRICE,
     COLOR_ID_WHITE_DARK,
+    COLOR_ID_BUTTON_GRAY,
 };
 void change_color_theme(uint32_t themeIndex);
-extern uint32_t theme_colors[1][12];
+extern uint32_t theme_colors[1][13];
 extern uint32_t active_theme_index;
 
 #ifdef __cplusplus
