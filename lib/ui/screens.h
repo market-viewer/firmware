@@ -19,10 +19,9 @@ enum ScreensEnum {
     SCREEN_ID_WIFI_SCREEN = 6,
     SCREEN_ID_SCREENS_SCREEN = 7,
     SCREEN_ID_CLOCK_SCREEN = 8,
-    SCREEN_ID_DIGITAL_CLOCK_SCREEN = 9,
-    SCREEN_ID_CRYPTO_SCREEN = 10,
-    SCREEN_ID_STOCK_SCREEN = 11,
-    _SCREEN_ID_LAST = 11
+    SCREEN_ID_CRYPTO_SCREEN = 9,
+    SCREEN_ID_STOCK_SCREEN = 10,
+    _SCREEN_ID_LAST = 10
 };
 
 typedef struct _objects_t {
@@ -34,7 +33,6 @@ typedef struct _objects_t {
     lv_obj_t *wifi_screen;
     lv_obj_t *screens_screen;
     lv_obj_t *clock_screen;
-    lv_obj_t *digital_clock_screen;
     lv_obj_t *crypto_screen;
     lv_obj_t *stock_screen;
     lv_obj_t *market_data_setting_main_panel;
@@ -112,14 +110,13 @@ typedef struct _objects_t {
     lv_obj_t *screen_not_fetched_label;
     lv_obj_t *screens_list_panel;
     lv_obj_t *screen_list_item_label_example;
-    lv_obj_t *clock_gauge_image;
     lv_obj_t *time_label;
     lv_obj_t *timezone_label;
     lv_obj_t *clock_needle_second;
     lv_obj_t *clock_needle_minute;
     lv_obj_t *digital_time_label;
     lv_obj_t *digital_date_label;
-    lv_obj_t *digital_date_label_1;
+    lv_obj_t *digital_timezone_label;
     lv_obj_t *crypto_graph_panel;
     lv_obj_t *crypto_ath_arc;
     lv_obj_t *crypto_price_label;
@@ -167,9 +164,6 @@ void tick_screen_screens_screen();
 
 void create_screen_clock_screen();
 void tick_screen_clock_screen();
-
-void create_screen_digital_clock_screen();
-void tick_screen_digital_clock_screen();
 
 void create_screen_crypto_screen();
 void tick_screen_crypto_screen();

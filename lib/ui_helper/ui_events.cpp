@@ -152,6 +152,28 @@ void action_toggle_market_screen_setting(lv_event_t * e) {
     updateDispalyGraph(isSwitchedOn, get_active_screen());
 }
 
+void action_simple_display_switch_toggle(lv_event_t * e) {
+    play_button_click_sound();
+
+    lv_obj_t * sw = lv_event_get_target(e);
+    bool isSwitchedOn = lv_obj_has_state(sw, LV_STATE_CHECKED);
+    updateSimpleDisplay(isSwitchedOn, get_active_screen());
+}
+void action_display_graph_switch_toggle(lv_event_t * e) {
+    play_button_click_sound();
+
+    lv_obj_t * sw = lv_event_get_target(e);
+    bool isSwitchedOn = lv_obj_has_state(sw, LV_STATE_CHECKED);
+    updateDispalyGraph(isSwitchedOn, get_active_screen());
+}
+void action_candle_chart_switch_toggle(lv_event_t * e) {
+    play_button_click_sound();
+
+    lv_obj_t * sw = lv_event_get_target(e);
+    bool isSwitchedOn = lv_obj_has_state(sw, LV_STATE_CHECKED);
+    updateCandleGraph(isSwitchedOn, get_active_screen());
+}
+
 void action_save_volume(lv_event_t * e) {
 	saveHardwaveNumberToPreferences("volume", currentVolume);
 }
@@ -241,4 +263,18 @@ void action_set_volume_from_arc(lv_event_t * e) {
 	char buf[16];     
     snprintf(buf, sizeof(buf), "%d%%", (int)percentage);     
     lv_label_set_text(objects.volume_value_label, buf);
+}
+
+void action_refetch_screens(lv_event_t * e) {
+    play_button_click_sound();
+
+    display_message("Fetching screens...", MessageSeverity::INFO);
+    bool successful = get_screens_from_backend();
+    destroy_message();
+
+    if (successful) {
+        show_success_message("Screens updated");
+    }
+
+    updateScreensScreenOnDataFetch(successful);
 }

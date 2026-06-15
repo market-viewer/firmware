@@ -213,8 +213,8 @@ void load_screen_by_index(int index, bool goingFromSettings) {
     switch (screenObj->getType()) {
         case ScreenType::STOCK: targetScreenUI = objects.stock_screen; break;
         case ScreenType::CRYPTO: targetScreenUI = objects.crypto_screen; break;
-        case ScreenType::CLOCK: targetScreenUI = objects.clock_screen; break;
         case ScreenType::TIMER: targetScreenUI = objects.timer_screen; break;
+        case ScreenType::CLOCK: targetScreenUI = objects.clock_screen; break;
         default: return;
     }
 

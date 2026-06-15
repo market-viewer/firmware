@@ -1,6 +1,8 @@
 #include "ClockScreen.h"
 #include "ui.h"
 #include <time.h>
+#include "screens.h"
+#include "images.h"
 
 bool ClockScreen::needsUpdate() {    
     // update the data here, we dont want to fetch from our standart backend api
@@ -85,38 +87,40 @@ void ClockScreen::render() {
 }
 
 void ClockScreen::renderDigital() {
+    //change the background
+    lv_obj_set_style_bg_img_src(objects.clock_screen, &img_blue_gradient, LV_PART_MAIN);
+
     //hide analog parts
-    // lv_obj_add_flag(img_clock_gauge, LV_OBJ_FLAG_HIDDEN);
-    // lv_obj_add_flag(timezone_label, LV_OBJ_FLAG_HIDDEN);
-    // lv_obj_add_flag(time_label, LV_OBJ_FLAG_HIDDEN);
-    // lv_obj_add_flag(img_clock_needle_small, LV_OBJ_FLAG_HIDDEN);
-    // lv_obj_add_flag(img_clock_needle_big, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(objects.timezone_label, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(objects.time_label, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(objects.clock_needle_second, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(objects.clock_needle_minute, LV_OBJ_FLAG_HIDDEN);
     
     //show digital parts
-    // lv_obj_clear_flag(ui_digitalClockBackground, LV_OBJ_FLAG_HIDDEN);
-    // lv_obj_clear_flag(ui_digitalTimeLabel, LV_OBJ_FLAG_HIDDEN);
-    // lv_obj_clear_flag(ui_digitalTimezoneLabel, LV_OBJ_FLAG_HIDDEN);
-    // lv_obj_clear_flag(ui_digitalDateLabel, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_clear_flag(objects.digital_time_label, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_clear_flag(objects.digital_date_label, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_clear_flag(objects.digital_timezone_label, LV_OBJ_FLAG_HIDDEN);
 
     //set the values
-    // lv_label_set_text(ui_digitalTimezoneLabel, timezone.c_str());
+    lv_label_set_text(objects.digital_timezone_label, timezone.c_str());
 }
 
 
 void ClockScreen::renderAnalog() {
+    //change the background
+    lv_obj_set_style_bg_img_src(objects.clock_screen, &img_clock_gauge, LV_PART_MAIN);
+
     //hide digital parts
-    // lv_obj_add_flag(ui_digitalClockBackground, LV_OBJ_FLAG_HIDDEN);
-    // lv_obj_add_flag(ui_digitalTimeLabel, LV_OBJ_FLAG_HIDDEN);
-    // lv_obj_add_flag(ui_digitalTimezoneLabel, LV_OBJ_FLAG_HIDDEN);
-    // lv_obj_add_flag(ui_digitalDateLabel, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(objects.digital_time_label, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(objects.digital_date_label, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_add_flag(objects.digital_timezone_label, LV_OBJ_FLAG_HIDDEN);
     
     //show analog parts
-    // lv_obj_clear_flag(ui_clockGaugeImage, LV_OBJ_FLAG_HIDDEN);
-    // lv_obj_clear_flag(ui_timezoneLabel, LV_OBJ_FLAG_HIDDEN);
-    // lv_obj_clear_flag(ui_timeLabel, LV_OBJ_FLAG_HIDDEN);
-    // lv_obj_clear_flag(ui_clockNeedleSecond, LV_OBJ_FLAG_HIDDEN);
-    // lv_obj_clear_flag(ui_clockNeedleMinute, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_clear_flag(objects.timezone_label, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_clear_flag(objects.time_label, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_clear_flag(objects.clock_needle_second, LV_OBJ_FLAG_HIDDEN);
+    lv_obj_clear_flag(objects.clock_needle_minute, LV_OBJ_FLAG_HIDDEN);
 
     //set the values
-    // lv_label_set_text(ui_timezoneLabel, timezone.c_str());
+    lv_label_set_text(objects.digital_timezone_label, timezone.c_str());
 }
