@@ -17,6 +17,7 @@
 | **Stock screen** | Displays any stock ticker with chart and percentage change for specified time frame |
 | **Clock** | Analog or digital clock, with any time zone |
 | **Stopwatch & timer** | Stopwatch and timer (up to 24h) |
+| **AI text** | Displays the AI generated text to you predefined prompt |
 | **Home/settings** | Change brightness, volume, manage screens, set up Wi-Fi, reboot device, ... |
 
 ## Hardware & Setup
