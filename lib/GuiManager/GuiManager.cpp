@@ -215,6 +215,7 @@ void load_screen_by_index(int index, bool goingFromSettings) {
         case ScreenType::CRYPTO: targetScreenUI = objects.crypto_screen; break;
         case ScreenType::TIMER: targetScreenUI = objects.timer_screen; break;
         case ScreenType::CLOCK: targetScreenUI = objects.clock_screen; break;
+        case ScreenType::AI_TEXT: targetScreenUI = objects.ai_text_screen; break;
         default: return;
     }
 

@@ -1,6 +1,6 @@
 #include "images.h"
 
-const ext_img_desc_t images[25] = {
+const ext_img_desc_t images[27] = {
     { "power_icon", &img_power_icon },
     { "reboot_icon", &img_reboot_icon },
     { "brightness_icon", &img_brightness_icon },
@@ -26,4 +26,6 @@ const ext_img_desc_t images[25] = {
     { "stock_icon", &img_stock_icon },
     { "background_green", &img_background_green },
     { "logo_big", &img_logo_big },
+    { "ai_icon", &img_ai_icon },
+    { "cross_icon", &img_cross_icon },
 };

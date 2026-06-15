@@ -45,13 +45,13 @@ void BaseScreen::handleUpdateError(String message) {
 BaseScreen* createScreenFromType(const String& type, JsonObject& data) {
     int position = data["position"];
 
-    // if (type == "AI_TEXT") {
-    //     return new AiTextScreen(
-    //         position,
-    //         data["fetchIntervalHours"],
-    //         data["prompt"]
-    //     );
-    // }
+    if (type == "AI_TEXT") {
+        return new AiTextScreen(
+            position,
+            data["fetchIntervalHours"],
+            data["prompt"]
+        );
+    }
     
     if (type == "CLOCK") {
         ClockType clockType = ClockType::ANALOG_CLOCK;

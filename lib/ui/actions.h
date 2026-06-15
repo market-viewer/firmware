@@ -38,6 +38,10 @@ extern void action_set_volume_from_arc(lv_event_t * e);
 extern void action_home_next_screen(lv_event_t * e);
 extern void action_toggle_market_screen_setting(lv_event_t * e);
 extern void action_refetch_screens(lv_event_t * e);
+extern void action_force_screen_update(lv_event_t * e);
+extern void action_close_ai_prompt_screen(lv_event_t * e);
+extern void action_open_ai_prompt_screen(lv_event_t * e);
+extern void action_update_ai_text_screen_from_prompt(lv_event_t * e);
 
 #ifdef __cplusplus
 }

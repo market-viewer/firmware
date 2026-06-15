@@ -1,42 +1,45 @@
-// #include "AiTextScreen.h"
-// #include "ui.h"
+#include "AiTextScreen.h"
+#include "ui.h"
+#include "screens.h"
 
-// void AiTextScreen::parseData(JsonObject& data) {
-//     displayText = data["displayText"] | "";
-// }
+void AiTextScreen::parseData(JsonObject& data) {
+    displayText = data["displayText"] | "";
+}
 
-// bool AiTextScreen::needsUpdate() {
-//     unsigned long refreshIntervalMillis = refreshIntervalHours * 3600000UL;
+bool AiTextScreen::needsUpdate() {
+    unsigned long refreshIntervalMillis = refreshIntervalHours * 3600000UL;
     
-//     return (millis() - lastFetchTime >= refreshIntervalMillis);
-// }
+    return (millis() - lastFetchTime >= refreshIntervalMillis);
+}
 
 
-// void AiTextScreen::render() {
-//     if (displayText == "") {
-//         renderNoData();
-//     } else {
-//         renderData();
-//     }
-// }
+void AiTextScreen::render() {
+    if (displayText == "") {
+        renderNoData();
+    } else {
+        renderData();
+    }
+}
 
-// void AiTextScreen::renderNoData() {
-//     //hide text data
-//     lv_obj_add_flag(ui_aiTextPanel, LV_OBJ_FLAG_HIDDEN);
-//     lv_obj_add_state(ui_aiTextReadButton, LV_STATE_DISABLED);
+void AiTextScreen::renderNoData() {
+    //hide text data
+    lv_obj_add_flag(objects.ai_text_container, LV_OBJ_FLAG_HIDDEN);
 
-//     //show prompt
-//     lv_obj_clear_flag(ui_aiTextScreenPromptPanel, LV_OBJ_FLAG_HIDDEN);
-//     lv_label_set_text(ui_aiPromptLabel, prompt.c_str());
-// }
+    lv_obj_clear_flag(objects.ai_no_data_container, LV_OBJ_FLAG_HIDDEN);
 
-// void AiTextScreen::renderData() {
-//     //hide prompt data
-//     lv_obj_add_flag(ui_aiTextScreenPromptPanel, LV_OBJ_FLAG_HIDDEN);
+    //edit the prompt
+    lv_label_set_text(objects.ai_prompt_label, prompt.c_str());
+}
+
+void AiTextScreen::renderData() {
+    //hide prompt data
+    lv_obj_add_flag(objects.ai_no_data_container, LV_OBJ_FLAG_HIDDEN);
     
-//     //show display data
-//     lv_obj_clear_flag(ui_aiTextPanel, LV_OBJ_FLAG_HIDDEN);
-//     lv_obj_clear_state(ui_aiTextReadButton, LV_STATE_DISABLED);
+    //show display data
+    lv_obj_clear_flag(objects.ai_text_container, LV_OBJ_FLAG_HIDDEN);
 
-//     lv_label_set_text(ui_aiTextLabel, displayText.c_str());
-// }
+    //edit the lables
+    lv_label_set_text(objects.ai_text_label, displayText.c_str());
+
+    lv_label_set_text(objects.ai_prompt_label, prompt.c_str());
+}

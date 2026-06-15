@@ -278,3 +278,29 @@ void action_refetch_screens(lv_event_t * e) {
 
     updateScreensScreenOnDataFetch(successful);
 }
+
+void action_force_screen_update(lv_event_t * e) {
+    updateScreenForce();
+}
+
+void action_close_ai_prompt_screen(lv_event_t * e) {
+    play_button_click_sound();
+
+    lv_obj_add_flag(objects.ai_prompt_container, LV_OBJ_FLAG_HIDDEN);
+}
+
+void action_open_ai_prompt_screen(lv_event_t * e) {
+    play_button_click_sound();
+
+    lv_obj_clear_flag(objects.ai_prompt_container, LV_OBJ_FLAG_HIDDEN);
+}
+
+void action_update_ai_text_screen_from_prompt(lv_event_t * e) {
+    //close the prompt screen
+    lv_obj_add_flag(objects.ai_prompt_container, LV_OBJ_FLAG_HIDDEN);
+
+    //update the screen
+    updateScreenForce();
+
+
+}

@@ -11,20 +11,22 @@ extern "C" {
 
 enum ScreensEnum {
     _SCREEN_ID_FIRST = 1,
-    SCREEN_ID_MARKET_DATA_SETTING_SCREEN = 1,
-    SCREEN_ID_TIMER_SCREEN = 2,
-    SCREEN_ID_HOME_SCREEN = 3,
-    SCREEN_ID_BRIGHTNESS_SCREEN = 4,
-    SCREEN_ID_VOLUME_SCREEN = 5,
-    SCREEN_ID_WIFI_SCREEN = 6,
-    SCREEN_ID_SCREENS_SCREEN = 7,
-    SCREEN_ID_CLOCK_SCREEN = 8,
-    SCREEN_ID_CRYPTO_SCREEN = 9,
-    SCREEN_ID_STOCK_SCREEN = 10,
-    _SCREEN_ID_LAST = 10
+    SCREEN_ID_AI_TEXT_SCREEN = 1,
+    SCREEN_ID_MARKET_DATA_SETTING_SCREEN = 2,
+    SCREEN_ID_TIMER_SCREEN = 3,
+    SCREEN_ID_HOME_SCREEN = 4,
+    SCREEN_ID_BRIGHTNESS_SCREEN = 5,
+    SCREEN_ID_VOLUME_SCREEN = 6,
+    SCREEN_ID_WIFI_SCREEN = 7,
+    SCREEN_ID_SCREENS_SCREEN = 8,
+    SCREEN_ID_CLOCK_SCREEN = 9,
+    SCREEN_ID_CRYPTO_SCREEN = 10,
+    SCREEN_ID_STOCK_SCREEN = 11,
+    _SCREEN_ID_LAST = 11
 };
 
 typedef struct _objects_t {
+    lv_obj_t *ai_text_screen;
     lv_obj_t *market_data_setting_screen;
     lv_obj_t *timer_screen;
     lv_obj_t *home_screen;
@@ -35,6 +37,20 @@ typedef struct _objects_t {
     lv_obj_t *clock_screen;
     lv_obj_t *crypto_screen;
     lv_obj_t *stock_screen;
+    lv_obj_t *ai_text_container;
+    lv_obj_t *ai_text_label;
+    lv_obj_t *obj0;
+    lv_obj_t *ai_info_button;
+    lv_obj_t *ai_no_data_container;
+    lv_obj_t *ai_no_data_label;
+    lv_obj_t *ai_no_data_refresh_button;
+    lv_obj_t *ai_prompt_container;
+    lv_obj_t *ai_prompt_text;
+    lv_obj_t *ai_prompt_text_container;
+    lv_obj_t *ai_prompt_label;
+    lv_obj_t *ai_prompt_buttons_container;
+    lv_obj_t *ai_prompt_refresh_button;
+    lv_obj_t *ai_prompt_close_button;
     lv_obj_t *market_data_setting_main_panel;
     lv_obj_t *simple_dispaly_cont;
     lv_obj_t *simple_display_label;
@@ -57,7 +73,7 @@ typedef struct _objects_t {
     lv_obj_t *timer_name_label;
     lv_obj_t *timer_arc;
     lv_obj_t *timer_time_label;
-    lv_obj_t *obj0;
+    lv_obj_t *obj1;
     lv_obj_t *home_container_main;
     lv_obj_t *power_icons_cont;
     lv_obj_t *trun_off_button;
@@ -72,19 +88,19 @@ typedef struct _objects_t {
     lv_obj_t *wifi_button;
     lv_obj_t *brightness_arc;
     lv_obj_t *birghtness_label;
-    lv_obj_t *obj1;
     lv_obj_t *obj2;
-    lv_obj_t *obj2__back_button;
+    lv_obj_t *obj3;
+    lv_obj_t *obj3__back_button;
     lv_obj_t *brightness_value_label;
     lv_obj_t *volume_arc;
     lv_obj_t *volume_label;
-    lv_obj_t *obj3;
-    lv_obj_t *volume_value_label;
     lv_obj_t *obj4;
-    lv_obj_t *obj4__back_button;
-    lv_obj_t *wifi_label;
+    lv_obj_t *volume_value_label;
     lv_obj_t *obj5;
     lv_obj_t *obj5__back_button;
+    lv_obj_t *wifi_label;
+    lv_obj_t *obj6;
+    lv_obj_t *obj6__back_button;
     lv_obj_t *main_container_wifi;
     lv_obj_t *connection_info_container;
     lv_obj_t *wifi_connection_round_indicator;
@@ -92,7 +108,7 @@ typedef struct _objects_t {
     lv_obj_t *connected_wifi_container;
     lv_obj_t *wifi_name_container;
     lv_obj_t *connected_wifi_ssid_label;
-    lv_obj_t *obj6;
+    lv_obj_t *obj7;
     lv_obj_t *backend_url_label;
     lv_obj_t *wifi_containers_buttons;
     lv_obj_t *wifi_config_button;
@@ -104,8 +120,8 @@ typedef struct _objects_t {
     lv_obj_t *overlay_wifi_ssid_label_3;
     lv_obj_t *overlay_wifi_pwd_label_value;
     lv_obj_t *screens_label;
-    lv_obj_t *obj7;
-    lv_obj_t *obj7__back_button;
+    lv_obj_t *obj8;
+    lv_obj_t *obj8__back_button;
     lv_obj_t *screens_refetch_button;
     lv_obj_t *screen_not_fetched_label;
     lv_obj_t *screens_list_panel;
@@ -140,6 +156,9 @@ typedef struct _objects_t {
 } objects_t;
 
 extern objects_t objects;
+
+void create_screen_ai_text_screen();
+void tick_screen_ai_text_screen();
 
 void create_screen_market_data_setting_screen();
 void tick_screen_market_data_setting_screen();
