@@ -221,7 +221,7 @@ void load_screen_by_index(int index, bool goingFromSettings) {
 
     //dont update the screen automatically on scrolling through screens
     if (!goingFromSettings) {
-        if (screenObj->getType() == ScreenType::STOCK || screenObj->getType() == ScreenType::CRYPTO) {
+        if (screenObj->getType() == ScreenType::STOCK || screenObj->getType() == ScreenType::CRYPTO || screenObj->getType() == ScreenType::AI_TEXT) {
             screenObj->postponeUpdate();
         }
     }
