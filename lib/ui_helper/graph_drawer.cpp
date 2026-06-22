@@ -4,6 +4,15 @@
 
 static lv_point_t pointBuffer[400]; 
 
+struct GraphAnimData {
+    lv_obj_t* line;
+    lv_obj_t* circle;
+};
+static GraphAnimData graph_anim_data;
+
+static int32_t circle_size = 20;
+
+
 void draw_candle_graph(lv_obj_t* panel, size_t pointCount) {
     Serial.println("Rendering candle graph");
     lv_color_t colorGreen = lv_color_hex(redColorGraph);
@@ -38,12 +47,60 @@ void draw_candle_graph(lv_obj_t* panel, size_t pointCount) {
 
 }
 
+
+void graph_anim_cb(void * var, int32_t current_point_count) {
+    GraphAnimData* data = (GraphAnimData*)var;
+    
+    if (current_point_count < 2) return; 
+
+    lv_line_set_points(data->line, pointBuffer, current_point_count);
+
+    int32_t tip_x = pointBuffer[current_point_count - 1].x;
+    int32_t tip_y = pointBuffer[current_point_count - 1].y;
+    
+    lv_obj_set_pos(data->circle, tip_x - (circle_size / 2), tip_y - (circle_size / 2));
+}
+
+
 void draw_line_graph(lv_obj_t* panel, size_t pointCount, lv_color_t color) {
     lv_obj_t* line = lv_line_create(panel);
     lv_line_set_points(line, pointBuffer, pointCount);
     lv_obj_set_style_line_width(line, 4, LV_PART_MAIN);
     lv_obj_set_style_line_color(line, color, LV_PART_MAIN);
-    lv_obj_set_style_line_rounded(line, true, LV_PART_MAIN);
+    lv_obj_set_style_line_rounded(line, false, LV_PART_MAIN);
+    
+    //add round ball at the end
+    lv_obj_t* circle = draw_graph_circle(pointBuffer[pointCount - 1], pointBuffer[pointCount - 1], color, panel);
+
+    graph_anim_data.line = line;
+    graph_anim_data.circle = circle;
+
+    // start the graph animation
+    lv_anim_t a;
+    lv_anim_init(&a);
+    lv_anim_set_var(&a, &graph_anim_data);
+    lv_anim_set_values(&a, 1, pointCount);
+    lv_anim_set_time(&a, 2000);                
+    lv_anim_set_delay(&a, 200);                
+    lv_anim_set_exec_cb(&a, graph_anim_cb);        
+    lv_anim_set_path_cb(&a, lv_anim_path_ease_in_out);
+    
+    lv_anim_start(&a);
+}
+
+lv_obj_t* draw_graph_circle(lv_point_t x_point, lv_point_t y_point, lv_color_t color, lv_obj_t* panel) {
+    int32_t x_pos = x_point.x;
+    int32_t y_pos = y_point.y;
+
+    lv_obj_t* circle = lv_obj_create(panel);
+    lv_obj_remove_style_all(circle);
+    
+    lv_obj_set_size(circle, circle_size, circle_size);
+    lv_obj_set_style_bg_color(circle, color, LV_PART_MAIN);       
+    lv_obj_set_style_bg_opa(circle, LV_OPA_COVER, LV_PART_MAIN); 
+    lv_obj_set_style_radius(circle, LV_RADIUS_CIRCLE, LV_PART_MAIN);
+
+    return circle;
 }
 
 
@@ -58,11 +115,15 @@ void draw_graph_on_canvas(ScreenType screenType, const std::vector<double>& rawD
     
     if (w < 5 || h < 5) return;
 
+    //horizontal padding 
+    int32_t pad_x = 20;
+    int32_t usable_w = w - (pad_x * 2);
+
     size_t totalDataPoints = rawData.size();
     size_t step = 1;
     
-    int minPixelsPerPoint = isCandleGraph ? 20 : 1; 
-    size_t maxPoints = w / minPixelsPerPoint;
+    int minPixelsPerPoint = isCandleGraph ? 20 : 3; 
+    size_t maxPoints = usable_w / minPixelsPerPoint;
     if (totalDataPoints > maxPoints) step = totalDataPoints / maxPoints;
 
     double minVal = rawData[0];
@@ -88,13 +149,13 @@ void draw_graph_on_canvas(ScreenType screenType, const std::vector<double>& rawD
         if (normalized < 0.0) normalized = 0.0;
         if (normalized > 1.0) normalized = 1.0;
 
-        pointBuffer[pointCount].x = (lv_coord_t)((i * w) / (totalDataPoints - 1));
+        pointBuffer[pointCount].x = pad_x + (lv_coord_t)((i * usable_w) / (totalDataPoints - 1));
         pointBuffer[pointCount].y = (lv_coord_t)(h - (normalized * h));
         pointCount++;
     }
 
-    if (pointCount > 0) pointBuffer[0].x = 0;
-    if (pointCount > 1) pointBuffer[pointCount-1].x = w - 1;
+    if (pointCount > 0) pointBuffer[0].x = pad_x;
+    if (pointCount > 1) pointBuffer[pointCount-1].x = w - pad_x - 1;
 
     
     if (!isCandleGraph) {
