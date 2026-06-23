@@ -116,13 +116,13 @@ void draw_graph_on_canvas(ScreenType screenType, const std::vector<double>& rawD
     if (w < 5 || h < 5) return;
 
     //horizontal padding 
-    int32_t pad_x = 20;
+    int32_t pad_x = 40;
     int32_t usable_w = w - (pad_x * 2);
 
     size_t totalDataPoints = rawData.size();
     size_t step = 1;
     
-    int minPixelsPerPoint = isCandleGraph ? 20 : 3; 
+    int minPixelsPerPoint = isCandleGraph ? 20 : 10; 
     size_t maxPoints = usable_w / minPixelsPerPoint;
     if (totalDataPoints > maxPoints) step = totalDataPoints / maxPoints;
 
