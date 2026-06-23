@@ -22,6 +22,158 @@ lv_obj_t *tick_value_change_obj;
 // Screens
 //
 
+void create_screen_crypto_screen() {
+    lv_obj_t *obj = lv_obj_create(0);
+    objects.crypto_screen = obj;
+    lv_obj_set_pos(obj, 0, 0);
+    lv_obj_set_size(obj, 466, 466);
+    lv_obj_add_event_cb(obj, action_finance_screen_gesture, LV_EVENT_GESTURE, (void *)0);
+    lv_obj_add_event_cb(obj, action_nav_to_home_scr, LV_EVENT_LONG_PRESSED, (void *)0);
+    lv_obj_set_style_bg_img_src(obj, &img_background_red, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_img_tiled(obj, true, LV_PART_MAIN | LV_STATE_DEFAULT);
+    {
+        lv_obj_t *parent_obj = obj;
+        {
+            // cryptoGraphPanel
+            lv_obj_t *obj = lv_obj_create(parent_obj);
+            objects.crypto_graph_panel = obj;
+            lv_obj_set_pos(obj, 0, 73);
+            lv_obj_set_size(obj, 466, 320);
+            lv_obj_set_style_pad_left(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_obj_set_style_pad_top(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_obj_set_style_pad_right(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_obj_set_style_pad_bottom(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_obj_set_style_bg_opa(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_obj_set_style_border_width(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_obj_set_style_radius(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_obj_clear_flag(obj, LV_OBJ_FLAG_SCROLLABLE);
+        }
+        {
+            // cryptoAthArc
+            lv_obj_t *obj = lv_arc_create(parent_obj);
+            objects.crypto_ath_arc = obj;
+            lv_obj_set_pos(obj, 18, 18);
+            lv_obj_set_size(obj, 430, 430);
+            lv_arc_set_value(obj, 50);
+            lv_arc_set_mode(obj, LV_ARC_MODE_REVERSE);
+            lv_arc_set_bg_start_angle(obj, 0);
+            lv_arc_set_bg_end_angle(obj, 70);
+            lv_arc_set_rotation(obj, 55);
+            lv_obj_clear_flag(obj, LV_OBJ_FLAG_CLICKABLE);
+            lv_obj_set_style_arc_width(obj, 15, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_obj_set_style_arc_color(obj, lv_color_hex(0x1e1e1e), LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_obj_set_style_arc_width(obj, 15, LV_PART_INDICATOR | LV_STATE_DEFAULT);
+            lv_obj_set_style_arc_color(obj, lv_color_hex(theme_colors[active_theme_index][9]), LV_PART_INDICATOR | LV_STATE_DEFAULT);
+            lv_obj_set_style_arc_opa(obj, 255, LV_PART_INDICATOR | LV_STATE_DEFAULT);
+            lv_obj_set_style_bg_color(obj, lv_color_hex(0xff0000), LV_PART_KNOB | LV_STATE_DEFAULT);
+        }
+        {
+            // cryptoPriceLabel
+            lv_obj_t *obj = lv_label_create(parent_obj);
+            objects.crypto_price_label = obj;
+            lv_obj_set_pos(obj, 0, 0);
+            lv_obj_set_size(obj, 450, LV_SIZE_CONTENT);
+            lv_label_set_long_mode(obj, LV_LABEL_LONG_CLIP);
+            lv_obj_set_style_align(obj, LV_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_obj_set_style_text_font(obj, &ui_font_mono_bold100, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_obj_set_style_text_align(obj, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_label_set_text_static(obj, "999$");
+        }
+        {
+            // cryptoPriceChangeLabel
+            lv_obj_t *obj = lv_label_create(parent_obj);
+            objects.crypto_price_change_label = obj;
+            lv_obj_set_pos(obj, 0, 90);
+            lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+            lv_obj_set_style_text_font(obj, &ui_font_mono40, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_obj_set_style_align(obj, LV_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_obj_set_style_bg_color(obj, lv_color_hex(theme_colors[active_theme_index][10]), LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_obj_set_style_bg_opa(obj, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_obj_set_style_radius(obj, 20, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_obj_set_style_pad_top(obj, 10, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_obj_set_style_pad_bottom(obj, 10, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_obj_set_style_pad_left(obj, 15, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_obj_set_style_pad_right(obj, 15, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_label_set_text_static(obj, "-0.75%");
+        }
+        {
+            // cryptoAthLabel
+            lv_obj_t *obj = lv_label_create(parent_obj);
+            objects.crypto_ath_label = obj;
+            lv_obj_set_pos(obj, 120, 145);
+            lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+            lv_obj_set_style_align(obj, LV_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_obj_set_style_text_color(obj, lv_color_hex(theme_colors[active_theme_index][11]), LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_obj_set_style_text_font(obj, &ui_font_mono_bold20, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_label_set_text_static(obj, "ATH");
+        }
+        {
+            // cryptoAthChangeLabel
+            lv_obj_t *obj = lv_label_create(parent_obj);
+            objects.crypto_ath_change_label = obj;
+            lv_obj_set_pos(obj, 0, 170);
+            lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+            lv_obj_set_style_align(obj, LV_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_obj_set_style_text_color(obj, lv_color_hex(theme_colors[active_theme_index][11]), LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_obj_set_style_text_font(obj, &ui_font_mono_bold20, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_label_set_text_static(obj, "-50%");
+        }
+        {
+            // cryptoZeroLabel
+            lv_obj_t *obj = lv_label_create(parent_obj);
+            objects.crypto_zero_label = obj;
+            lv_obj_set_pos(obj, -120, 145);
+            lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+            lv_obj_set_style_align(obj, LV_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_obj_set_style_text_color(obj, lv_color_hex(theme_colors[active_theme_index][11]), LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_obj_set_style_text_font(obj, &ui_font_mono_bold20, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_label_set_text_static(obj, "-100%");
+        }
+        {
+            // cryptoIcon
+            lv_obj_t *obj = lv_img_create(parent_obj);
+            objects.crypto_icon = obj;
+            lv_obj_set_pos(obj, 213, 5);
+            lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+            lv_img_set_src(obj, &img_crypto_icon);
+            lv_obj_set_style_img_opa(obj, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_obj_set_style_img_recolor(obj, lv_color_hex(0xffffff), LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_obj_set_style_img_recolor_opa(obj, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
+        }
+        {
+            // cryptoAssetCurrencyLabel
+            lv_obj_t *obj = lv_label_create(parent_obj);
+            objects.crypto_asset_currency_label = obj;
+            lv_obj_set_pos(obj, 0, -160);
+            lv_obj_set_size(obj, 280, LV_SIZE_CONTENT);
+            lv_label_set_long_mode(obj, LV_LABEL_LONG_DOT);
+            lv_obj_set_style_align(obj, LV_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_obj_set_style_text_color(obj, lv_color_hex(theme_colors[active_theme_index][11]), LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_obj_set_style_text_font(obj, &ui_font_mono_light30, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_obj_set_style_text_align(obj, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_label_set_text_static(obj, "");
+        }
+        {
+            // cryptoTimeFrameLabel
+            lv_obj_t *obj = lv_label_create(parent_obj);
+            objects.crypto_time_frame_label = obj;
+            lv_obj_set_pos(obj, 0, -125);
+            lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+            lv_label_set_long_mode(obj, LV_LABEL_LONG_DOT);
+            lv_obj_set_style_align(obj, LV_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_obj_set_style_text_color(obj, lv_color_hex(theme_colors[active_theme_index][11]), LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_obj_set_style_text_font(obj, &ui_font_mono_bold20, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_obj_set_style_text_align(obj, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_label_set_text_static(obj, "");
+        }
+    }
+    
+    tick_screen_crypto_screen();
+}
+
+void tick_screen_crypto_screen() {
+}
+
 void create_screen_ai_text_screen() {
     lv_obj_t *obj = lv_obj_create(0);
     objects.ai_text_screen = obj;
@@ -906,7 +1058,7 @@ void create_screen_brightness_screen() {
             lv_obj_set_style_pad_bottom(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
             lv_obj_set_style_bg_opa(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
             lv_obj_set_style_border_width(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-            create_user_widget_back_button(obj, 64);
+            create_user_widget_back_button(obj, 74);
             lv_obj_add_event_cb(obj, action_nav_to_home_scr, LV_EVENT_CLICKED, (void *)0);
         }
         {
@@ -927,7 +1079,7 @@ void create_screen_brightness_screen() {
 }
 
 void tick_screen_brightness_screen() {
-    tick_user_widget_back_button(64);
+    tick_user_widget_back_button(74);
 }
 
 void create_screen_volume_screen() {
@@ -992,7 +1144,7 @@ void create_screen_volume_screen() {
             lv_obj_set_style_pad_bottom(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
             lv_obj_set_style_bg_opa(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
             lv_obj_set_style_border_width(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-            create_user_widget_back_button(obj, 71);
+            create_user_widget_back_button(obj, 81);
             lv_obj_add_event_cb(obj, action_nav_to_home_scr, LV_EVENT_CLICKED, (void *)0);
         }
     }
@@ -1001,7 +1153,7 @@ void create_screen_volume_screen() {
 }
 
 void tick_screen_volume_screen() {
-    tick_user_widget_back_button(71);
+    tick_user_widget_back_button(81);
 }
 
 void create_screen_wifi_screen() {
@@ -1034,7 +1186,7 @@ void create_screen_wifi_screen() {
             lv_obj_set_style_pad_bottom(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
             lv_obj_set_style_bg_opa(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
             lv_obj_set_style_border_width(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-            create_user_widget_back_button(obj, 74);
+            create_user_widget_back_button(obj, 84);
             lv_obj_add_event_cb(obj, action_nav_to_home_scr, LV_EVENT_CLICKED, (void *)0);
         }
         {
@@ -1313,7 +1465,7 @@ void create_screen_wifi_screen() {
 }
 
 void tick_screen_wifi_screen() {
-    tick_user_widget_back_button(74);
+    tick_user_widget_back_button(84);
 }
 
 void create_screen_screens_screen() {
@@ -1347,7 +1499,7 @@ void create_screen_screens_screen() {
             lv_obj_set_style_pad_bottom(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
             lv_obj_set_style_bg_opa(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
             lv_obj_set_style_border_width(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-            create_user_widget_back_button(obj, 95);
+            create_user_widget_back_button(obj, 105);
             lv_obj_add_event_cb(obj, action_nav_to_home_scr, LV_EVENT_CLICKED, (void *)0);
         }
         {
@@ -1413,7 +1565,7 @@ void create_screen_screens_screen() {
 }
 
 void tick_screen_screens_screen() {
-    tick_user_widget_back_button(95);
+    tick_user_widget_back_button(105);
 }
 
 void create_screen_clock_screen() {
@@ -1510,157 +1662,6 @@ void create_screen_clock_screen() {
 }
 
 void tick_screen_clock_screen() {
-}
-
-void create_screen_crypto_screen() {
-    lv_obj_t *obj = lv_obj_create(0);
-    objects.crypto_screen = obj;
-    lv_obj_set_pos(obj, 0, 0);
-    lv_obj_set_size(obj, 466, 466);
-    lv_obj_add_event_cb(obj, action_finance_screen_gesture, LV_EVENT_GESTURE, (void *)0);
-    lv_obj_add_event_cb(obj, action_nav_to_home_scr, LV_EVENT_LONG_PRESSED, (void *)0);
-    lv_obj_set_style_bg_img_src(obj, &img_background_red, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_img_tiled(obj, true, LV_PART_MAIN | LV_STATE_DEFAULT);
-    {
-        lv_obj_t *parent_obj = obj;
-        {
-            // cryptoGraphPanel
-            lv_obj_t *obj = lv_obj_create(parent_obj);
-            objects.crypto_graph_panel = obj;
-            lv_obj_set_pos(obj, 0, 73);
-            lv_obj_set_size(obj, 466, 320);
-            lv_obj_set_style_pad_left(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-            lv_obj_set_style_pad_top(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-            lv_obj_set_style_pad_right(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-            lv_obj_set_style_pad_bottom(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-            lv_obj_set_style_bg_opa(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-            lv_obj_set_style_border_width(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-            lv_obj_set_style_radius(obj, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-            lv_obj_clear_flag(obj, LV_OBJ_FLAG_SCROLLABLE);
-        }
-        {
-            // cryptoAthArc
-            lv_obj_t *obj = lv_arc_create(parent_obj);
-            objects.crypto_ath_arc = obj;
-            lv_obj_set_pos(obj, 18, 18);
-            lv_obj_set_size(obj, 430, 430);
-            lv_arc_set_value(obj, 50);
-            lv_arc_set_mode(obj, LV_ARC_MODE_REVERSE);
-            lv_arc_set_bg_start_angle(obj, 0);
-            lv_arc_set_bg_end_angle(obj, 70);
-            lv_arc_set_rotation(obj, 55);
-            lv_obj_set_style_arc_width(obj, 15, LV_PART_MAIN | LV_STATE_DEFAULT);
-            lv_obj_set_style_arc_color(obj, lv_color_hex(0x1e1e1e), LV_PART_MAIN | LV_STATE_DEFAULT);
-            lv_obj_set_style_arc_width(obj, 15, LV_PART_INDICATOR | LV_STATE_DEFAULT);
-            lv_obj_set_style_arc_color(obj, lv_color_hex(theme_colors[active_theme_index][9]), LV_PART_INDICATOR | LV_STATE_DEFAULT);
-            lv_obj_set_style_arc_opa(obj, 255, LV_PART_INDICATOR | LV_STATE_DEFAULT);
-            lv_obj_set_style_bg_color(obj, lv_color_hex(0xff0000), LV_PART_KNOB | LV_STATE_DEFAULT);
-        }
-        {
-            // cryptoPriceLabel
-            lv_obj_t *obj = lv_label_create(parent_obj);
-            objects.crypto_price_label = obj;
-            lv_obj_set_pos(obj, 0, 0);
-            lv_obj_set_size(obj, 450, LV_SIZE_CONTENT);
-            lv_label_set_long_mode(obj, LV_LABEL_LONG_CLIP);
-            lv_obj_set_style_align(obj, LV_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
-            lv_obj_set_style_text_font(obj, &ui_font_mono_bold100, LV_PART_MAIN | LV_STATE_DEFAULT);
-            lv_obj_set_style_text_align(obj, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
-            lv_label_set_text_static(obj, "999$");
-        }
-        {
-            // cryptoPriceChangeLabel
-            lv_obj_t *obj = lv_label_create(parent_obj);
-            objects.crypto_price_change_label = obj;
-            lv_obj_set_pos(obj, 0, 90);
-            lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
-            lv_obj_set_style_text_font(obj, &ui_font_mono40, LV_PART_MAIN | LV_STATE_DEFAULT);
-            lv_obj_set_style_align(obj, LV_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
-            lv_obj_set_style_bg_color(obj, lv_color_hex(theme_colors[active_theme_index][10]), LV_PART_MAIN | LV_STATE_DEFAULT);
-            lv_obj_set_style_bg_opa(obj, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-            lv_obj_set_style_radius(obj, 20, LV_PART_MAIN | LV_STATE_DEFAULT);
-            lv_obj_set_style_pad_top(obj, 10, LV_PART_MAIN | LV_STATE_DEFAULT);
-            lv_obj_set_style_pad_bottom(obj, 10, LV_PART_MAIN | LV_STATE_DEFAULT);
-            lv_obj_set_style_pad_left(obj, 15, LV_PART_MAIN | LV_STATE_DEFAULT);
-            lv_obj_set_style_pad_right(obj, 15, LV_PART_MAIN | LV_STATE_DEFAULT);
-            lv_label_set_text_static(obj, "-0.75%");
-        }
-        {
-            // cryptoAthLabel
-            lv_obj_t *obj = lv_label_create(parent_obj);
-            objects.crypto_ath_label = obj;
-            lv_obj_set_pos(obj, 120, 145);
-            lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
-            lv_obj_set_style_align(obj, LV_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
-            lv_obj_set_style_text_color(obj, lv_color_hex(theme_colors[active_theme_index][11]), LV_PART_MAIN | LV_STATE_DEFAULT);
-            lv_obj_set_style_text_font(obj, &ui_font_mono_bold20, LV_PART_MAIN | LV_STATE_DEFAULT);
-            lv_label_set_text_static(obj, "ATH");
-        }
-        {
-            // cryptoAthChangeLabel
-            lv_obj_t *obj = lv_label_create(parent_obj);
-            objects.crypto_ath_change_label = obj;
-            lv_obj_set_pos(obj, 0, 170);
-            lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
-            lv_obj_set_style_align(obj, LV_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
-            lv_obj_set_style_text_color(obj, lv_color_hex(theme_colors[active_theme_index][11]), LV_PART_MAIN | LV_STATE_DEFAULT);
-            lv_obj_set_style_text_font(obj, &ui_font_mono_bold20, LV_PART_MAIN | LV_STATE_DEFAULT);
-            lv_label_set_text_static(obj, "-50%");
-        }
-        {
-            // cryptoZeroLabel
-            lv_obj_t *obj = lv_label_create(parent_obj);
-            objects.crypto_zero_label = obj;
-            lv_obj_set_pos(obj, -120, 145);
-            lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
-            lv_obj_set_style_align(obj, LV_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
-            lv_obj_set_style_text_color(obj, lv_color_hex(theme_colors[active_theme_index][11]), LV_PART_MAIN | LV_STATE_DEFAULT);
-            lv_obj_set_style_text_font(obj, &ui_font_mono_bold20, LV_PART_MAIN | LV_STATE_DEFAULT);
-            lv_label_set_text_static(obj, "-100%");
-        }
-        {
-            // cryptoIcon
-            lv_obj_t *obj = lv_img_create(parent_obj);
-            objects.crypto_icon = obj;
-            lv_obj_set_pos(obj, 213, 5);
-            lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
-            lv_img_set_src(obj, &img_crypto_icon);
-            lv_obj_set_style_img_opa(obj, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-            lv_obj_set_style_img_recolor(obj, lv_color_hex(0xffffff), LV_PART_MAIN | LV_STATE_DEFAULT);
-            lv_obj_set_style_img_recolor_opa(obj, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
-        }
-        {
-            // cryptoAssetCurrencyLabel
-            lv_obj_t *obj = lv_label_create(parent_obj);
-            objects.crypto_asset_currency_label = obj;
-            lv_obj_set_pos(obj, 0, -160);
-            lv_obj_set_size(obj, 280, LV_SIZE_CONTENT);
-            lv_label_set_long_mode(obj, LV_LABEL_LONG_DOT);
-            lv_obj_set_style_align(obj, LV_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
-            lv_obj_set_style_text_color(obj, lv_color_hex(theme_colors[active_theme_index][11]), LV_PART_MAIN | LV_STATE_DEFAULT);
-            lv_obj_set_style_text_font(obj, &ui_font_mono_light30, LV_PART_MAIN | LV_STATE_DEFAULT);
-            lv_obj_set_style_text_align(obj, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
-            lv_label_set_text_static(obj, "");
-        }
-        {
-            // cryptoTimeFrameLabel
-            lv_obj_t *obj = lv_label_create(parent_obj);
-            objects.crypto_time_frame_label = obj;
-            lv_obj_set_pos(obj, 0, -125);
-            lv_obj_set_size(obj, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
-            lv_label_set_long_mode(obj, LV_LABEL_LONG_DOT);
-            lv_obj_set_style_align(obj, LV_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
-            lv_obj_set_style_text_color(obj, lv_color_hex(theme_colors[active_theme_index][11]), LV_PART_MAIN | LV_STATE_DEFAULT);
-            lv_obj_set_style_text_font(obj, &ui_font_mono_bold20, LV_PART_MAIN | LV_STATE_DEFAULT);
-            lv_obj_set_style_text_align(obj, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
-            lv_label_set_text_static(obj, "");
-        }
-    }
-    
-    tick_screen_crypto_screen();
-}
-
-void tick_screen_crypto_screen() {
 }
 
 void create_screen_stock_screen() {
@@ -1852,6 +1853,7 @@ void tick_user_widget_back_button(int startWidgetIndex) {
 
 typedef void (*tick_screen_func_t)();
 tick_screen_func_t tick_screen_funcs[] = {
+    tick_screen_crypto_screen,
     tick_screen_ai_text_screen,
     tick_screen_market_data_setting_screen,
     tick_screen_timer_screen,
@@ -1861,7 +1863,6 @@ tick_screen_func_t tick_screen_funcs[] = {
     tick_screen_wifi_screen,
     tick_screen_screens_screen,
     tick_screen_clock_screen,
-    tick_screen_crypto_screen,
     tick_screen_stock_screen,
 };
 void tick_screen(int screen_index) {
@@ -1960,6 +1961,15 @@ void change_color_theme(uint32_t theme_index) {
     active_theme_index = theme_index;
     
     {
+        lv_obj_set_style_arc_color(objects.crypto_ath_arc, lv_color_hex(theme_colors[theme_index][9]), LV_PART_INDICATOR | LV_STATE_DEFAULT);
+        lv_obj_set_style_bg_color(objects.crypto_price_change_label, lv_color_hex(theme_colors[theme_index][10]), LV_PART_MAIN | LV_STATE_DEFAULT);
+        lv_obj_set_style_text_color(objects.crypto_ath_label, lv_color_hex(theme_colors[theme_index][11]), LV_PART_MAIN | LV_STATE_DEFAULT);
+        lv_obj_set_style_text_color(objects.crypto_ath_change_label, lv_color_hex(theme_colors[theme_index][11]), LV_PART_MAIN | LV_STATE_DEFAULT);
+        lv_obj_set_style_text_color(objects.crypto_zero_label, lv_color_hex(theme_colors[theme_index][11]), LV_PART_MAIN | LV_STATE_DEFAULT);
+        lv_obj_set_style_text_color(objects.crypto_asset_currency_label, lv_color_hex(theme_colors[theme_index][11]), LV_PART_MAIN | LV_STATE_DEFAULT);
+        lv_obj_set_style_text_color(objects.crypto_time_frame_label, lv_color_hex(theme_colors[theme_index][11]), LV_PART_MAIN | LV_STATE_DEFAULT);
+    }
+    {
         lv_obj_set_style_text_color(objects.ai_no_data_label, lv_color_hex(theme_colors[theme_index][11]), LV_PART_MAIN | LV_STATE_DEFAULT);
         lv_obj_set_style_bg_color(objects.ai_prompt_container, lv_color_hex(theme_colors[theme_index][0]), LV_PART_MAIN | LV_STATE_DEFAULT);
         lv_obj_set_style_text_color(objects.ai_prompt_label, lv_color_hex(theme_colors[theme_index][11]), LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -2002,7 +2012,7 @@ void change_color_theme(uint32_t theme_index) {
             int startWidgetIndex;
             (void)startWidgetIndex;
             {
-                startWidgetIndex = 64;
+                startWidgetIndex = 74;
                 lv_obj_set_style_img_recolor(((lv_obj_t **)&objects)[startWidgetIndex + 0], lv_color_hex(theme_colors[theme_index][1]), LV_PART_MAIN | LV_STATE_DEFAULT);
                 lv_obj_set_style_bg_img_recolor(((lv_obj_t **)&objects)[startWidgetIndex + 0], lv_color_hex(theme_colors[theme_index][3]), LV_PART_MAIN | LV_STATE_DEFAULT);
             }
@@ -2017,7 +2027,7 @@ void change_color_theme(uint32_t theme_index) {
             int startWidgetIndex;
             (void)startWidgetIndex;
             {
-                startWidgetIndex = 71;
+                startWidgetIndex = 81;
                 lv_obj_set_style_img_recolor(((lv_obj_t **)&objects)[startWidgetIndex + 0], lv_color_hex(theme_colors[theme_index][1]), LV_PART_MAIN | LV_STATE_DEFAULT);
                 lv_obj_set_style_bg_img_recolor(((lv_obj_t **)&objects)[startWidgetIndex + 0], lv_color_hex(theme_colors[theme_index][3]), LV_PART_MAIN | LV_STATE_DEFAULT);
             }
@@ -2037,7 +2047,7 @@ void change_color_theme(uint32_t theme_index) {
             int startWidgetIndex;
             (void)startWidgetIndex;
             {
-                startWidgetIndex = 74;
+                startWidgetIndex = 84;
                 lv_obj_set_style_img_recolor(((lv_obj_t **)&objects)[startWidgetIndex + 0], lv_color_hex(theme_colors[theme_index][1]), LV_PART_MAIN | LV_STATE_DEFAULT);
                 lv_obj_set_style_bg_img_recolor(((lv_obj_t **)&objects)[startWidgetIndex + 0], lv_color_hex(theme_colors[theme_index][3]), LV_PART_MAIN | LV_STATE_DEFAULT);
             }
@@ -2052,7 +2062,7 @@ void change_color_theme(uint32_t theme_index) {
             int startWidgetIndex;
             (void)startWidgetIndex;
             {
-                startWidgetIndex = 95;
+                startWidgetIndex = 105;
                 lv_obj_set_style_img_recolor(((lv_obj_t **)&objects)[startWidgetIndex + 0], lv_color_hex(theme_colors[theme_index][1]), LV_PART_MAIN | LV_STATE_DEFAULT);
                 lv_obj_set_style_bg_img_recolor(((lv_obj_t **)&objects)[startWidgetIndex + 0], lv_color_hex(theme_colors[theme_index][3]), LV_PART_MAIN | LV_STATE_DEFAULT);
             }
@@ -2060,15 +2070,6 @@ void change_color_theme(uint32_t theme_index) {
     }
     {
         lv_obj_set_style_bg_color(objects.clock_screen, lv_color_hex(theme_colors[theme_index][0]), LV_PART_MAIN | LV_STATE_DEFAULT);
-    }
-    {
-        lv_obj_set_style_arc_color(objects.crypto_ath_arc, lv_color_hex(theme_colors[theme_index][9]), LV_PART_INDICATOR | LV_STATE_DEFAULT);
-        lv_obj_set_style_bg_color(objects.crypto_price_change_label, lv_color_hex(theme_colors[theme_index][10]), LV_PART_MAIN | LV_STATE_DEFAULT);
-        lv_obj_set_style_text_color(objects.crypto_ath_label, lv_color_hex(theme_colors[theme_index][11]), LV_PART_MAIN | LV_STATE_DEFAULT);
-        lv_obj_set_style_text_color(objects.crypto_ath_change_label, lv_color_hex(theme_colors[theme_index][11]), LV_PART_MAIN | LV_STATE_DEFAULT);
-        lv_obj_set_style_text_color(objects.crypto_zero_label, lv_color_hex(theme_colors[theme_index][11]), LV_PART_MAIN | LV_STATE_DEFAULT);
-        lv_obj_set_style_text_color(objects.crypto_asset_currency_label, lv_color_hex(theme_colors[theme_index][11]), LV_PART_MAIN | LV_STATE_DEFAULT);
-        lv_obj_set_style_text_color(objects.crypto_time_frame_label, lv_color_hex(theme_colors[theme_index][11]), LV_PART_MAIN | LV_STATE_DEFAULT);
     }
     {
         lv_obj_set_style_bg_color(objects.stock_price_change_label, lv_color_hex(theme_colors[theme_index][10]), LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -2081,6 +2082,7 @@ void change_color_theme(uint32_t theme_index) {
     lv_style_set_arc_color(get_style_big_arc_INDICATOR_DEFAULT(), lv_color_hex(theme_colors[theme_index][4]));
     lv_style_set_bg_color(get_style_big_arc_KNOB_DEFAULT(), lv_color_hex(theme_colors[theme_index][5]));
     lv_style_set_bg_color(get_style_big_arc_MAIN_DEFAULT(), lv_color_hex(theme_colors[theme_index][1]));
+    lv_obj_invalidate(objects.crypto_screen);
     lv_obj_invalidate(objects.ai_text_screen);
     lv_obj_invalidate(objects.market_data_setting_screen);
     lv_obj_invalidate(objects.timer_screen);
@@ -2090,7 +2092,6 @@ void change_color_theme(uint32_t theme_index) {
     lv_obj_invalidate(objects.wifi_screen);
     lv_obj_invalidate(objects.screens_screen);
     lv_obj_invalidate(objects.clock_screen);
-    lv_obj_invalidate(objects.crypto_screen);
     lv_obj_invalidate(objects.stock_screen);
 }
 uint32_t theme_colors[1][13] = {
@@ -2110,6 +2111,7 @@ void create_screens() {
     
     // Initialize screens
     // Create screens
+    create_screen_crypto_screen();
     create_screen_ai_text_screen();
     create_screen_market_data_setting_screen();
     create_screen_timer_screen();
@@ -2119,6 +2121,5 @@ void create_screens() {
     create_screen_wifi_screen();
     create_screen_screens_screen();
     create_screen_clock_screen();
-    create_screen_crypto_screen();
     create_screen_stock_screen();
 }

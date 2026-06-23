@@ -11,21 +11,22 @@ extern "C" {
 
 enum ScreensEnum {
     _SCREEN_ID_FIRST = 1,
-    SCREEN_ID_AI_TEXT_SCREEN = 1,
-    SCREEN_ID_MARKET_DATA_SETTING_SCREEN = 2,
-    SCREEN_ID_TIMER_SCREEN = 3,
-    SCREEN_ID_HOME_SCREEN = 4,
-    SCREEN_ID_BRIGHTNESS_SCREEN = 5,
-    SCREEN_ID_VOLUME_SCREEN = 6,
-    SCREEN_ID_WIFI_SCREEN = 7,
-    SCREEN_ID_SCREENS_SCREEN = 8,
-    SCREEN_ID_CLOCK_SCREEN = 9,
-    SCREEN_ID_CRYPTO_SCREEN = 10,
+    SCREEN_ID_CRYPTO_SCREEN = 1,
+    SCREEN_ID_AI_TEXT_SCREEN = 2,
+    SCREEN_ID_MARKET_DATA_SETTING_SCREEN = 3,
+    SCREEN_ID_TIMER_SCREEN = 4,
+    SCREEN_ID_HOME_SCREEN = 5,
+    SCREEN_ID_BRIGHTNESS_SCREEN = 6,
+    SCREEN_ID_VOLUME_SCREEN = 7,
+    SCREEN_ID_WIFI_SCREEN = 8,
+    SCREEN_ID_SCREENS_SCREEN = 9,
+    SCREEN_ID_CLOCK_SCREEN = 10,
     SCREEN_ID_STOCK_SCREEN = 11,
     _SCREEN_ID_LAST = 11
 };
 
 typedef struct _objects_t {
+    lv_obj_t *crypto_screen;
     lv_obj_t *ai_text_screen;
     lv_obj_t *market_data_setting_screen;
     lv_obj_t *timer_screen;
@@ -35,8 +36,17 @@ typedef struct _objects_t {
     lv_obj_t *wifi_screen;
     lv_obj_t *screens_screen;
     lv_obj_t *clock_screen;
-    lv_obj_t *crypto_screen;
     lv_obj_t *stock_screen;
+    lv_obj_t *crypto_graph_panel;
+    lv_obj_t *crypto_ath_arc;
+    lv_obj_t *crypto_price_label;
+    lv_obj_t *crypto_price_change_label;
+    lv_obj_t *crypto_ath_label;
+    lv_obj_t *crypto_ath_change_label;
+    lv_obj_t *crypto_zero_label;
+    lv_obj_t *crypto_icon;
+    lv_obj_t *crypto_asset_currency_label;
+    lv_obj_t *crypto_time_frame_label;
     lv_obj_t *ai_text_container;
     lv_obj_t *ai_text_label;
     lv_obj_t *obj0;
@@ -133,16 +143,6 @@ typedef struct _objects_t {
     lv_obj_t *digital_time_label;
     lv_obj_t *digital_date_label;
     lv_obj_t *digital_timezone_label;
-    lv_obj_t *crypto_graph_panel;
-    lv_obj_t *crypto_ath_arc;
-    lv_obj_t *crypto_price_label;
-    lv_obj_t *crypto_price_change_label;
-    lv_obj_t *crypto_ath_label;
-    lv_obj_t *crypto_ath_change_label;
-    lv_obj_t *crypto_zero_label;
-    lv_obj_t *crypto_icon;
-    lv_obj_t *crypto_asset_currency_label;
-    lv_obj_t *crypto_time_frame_label;
     lv_obj_t *stock_graph_panel;
     lv_obj_t *stock_price_label;
     lv_obj_t *stock_price_change_label;
@@ -156,6 +156,9 @@ typedef struct _objects_t {
 } objects_t;
 
 extern objects_t objects;
+
+void create_screen_crypto_screen();
+void tick_screen_crypto_screen();
 
 void create_screen_ai_text_screen();
 void tick_screen_ai_text_screen();
@@ -183,9 +186,6 @@ void tick_screen_screens_screen();
 
 void create_screen_clock_screen();
 void tick_screen_clock_screen();
-
-void create_screen_crypto_screen();
-void tick_screen_crypto_screen();
 
 void create_screen_stock_screen();
 void tick_screen_stock_screen();
